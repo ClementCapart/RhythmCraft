@@ -5,12 +5,24 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-	private Controller m_instance = null;
+	private static Controller m_instance = null;
+	public static Controller Instance
+	{
+		get { return m_instance; }
+	}
 
 	private Direction m_currentDirection = Direction.None;
 	public Direction ControlDirection
 	{
 		get { return m_currentDirection; }
+	}
+
+	public delegate void OnChangeDirectionDelegate(Direction direction);
+	private static OnChangeDirectionDelegate s_onChangeDirection = null;
+	public static OnChangeDirectionDelegate OnChangeDirection
+	{
+		get { return s_onChangeDirection; }
+		set {  s_onChangeDirection = value; }
 	}
 
 	void Awake()
@@ -22,19 +34,32 @@ public class Controller : MonoBehaviour
 	{
 		if (XInput.GetButton(Buttons.LeftStickUp, 0))
 		{
-			m_currentDirection = Direction.Up;
+			ChangeDirection(Direction.Up);
 		}
 		else if (XInput.GetButton(Buttons.LeftStickRight, 0))
 		{
-			m_currentDirection = Direction.Right;
+			ChangeDirection(Direction.Right);
 		}
 		else if (XInput.GetButton(Buttons.LeftStickDown, 0))
 		{
-			m_currentDirection = Direction.Down;
+			ChangeDirection(Direction.Down);
 		}
 		else if (XInput.GetButton(Buttons.LeftStickLeft, 0))
 		{
-			m_currentDirection = Direction.Left;
+			ChangeDirection(Direction.Left);
 		}
+		else
+		{
+			ChangeDirection(Direction.None);
+		}
+	}
+
+	void ChangeDirection(Direction newDirection)
+	{
+		if (m_currentDirection != newDirection)
+		{
+			m_currentDirection = newDirection;
+			OnChangeDirection(newDirection);
+		}	
 	}
 }
