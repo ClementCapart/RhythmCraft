@@ -8,6 +8,7 @@ public class CraftPatternPlayer : MonoBehaviour
 	List<CraftToken> m_currentTokens = new List<CraftToken>();
 	
 	public Animator m_Animator = null;
+    public RecipeData m_recipe;
 
 	void Start()
 	{
