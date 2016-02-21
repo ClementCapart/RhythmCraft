@@ -39,7 +39,7 @@ public class ItemDatabaseEditor : Editor
 
         this.serializedObject.Update();
 
-        ItemData item = ItemDatabase.GetItemByIndex(m_currentlySelected);
+        ItemData item = ItemDatabase.GetItemByIndex(m_currentlySelected);        
 
         if (item != null)
         {
@@ -56,7 +56,9 @@ public class ItemDatabaseEditor : Editor
                     item.m_IsStackable = EditorGUILayout.Toggle("Is Stackable", item.m_IsStackable);
                     item.m_TypeFlags = (ItemType)EditorGUILayout.EnumMaskField("Type", item.m_TypeFlags);
                     item.m_CraftPattern = EditorGUILayout.ObjectField("Craft Pattern", item.m_CraftPattern, typeof(AnimationClip), false) as AnimationClip;                    
-
+                    
+                    SerializedProperty recipeProp = m_itemListProperty.GetArrayElementAtIndex(m_currentlySelected).FindPropertyRelative("m_Recipe");
+                    EditorGUILayout.PropertyField(recipeProp, true);
                 }
                 GUILayout.EndVertical();
             }

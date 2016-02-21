@@ -21,7 +21,7 @@ public class ItemData
 [System.Serializable]
 public class RecipeData
 {
-    public List<RecipeElement> m_itemNeeded = new List<RecipeElement>();
+    public List<RecipeElement> m_ItemsNeeded = new List<RecipeElement>();
 }
 
 [System.Serializable]
@@ -153,5 +153,21 @@ public class ItemDatabase : AssetSingleton<ItemDatabase>
             if(Instance.m_itemDatabase.ContainsKey(item.m_UniqueID))
                 Instance.m_itemDatabase.Remove(item.m_UniqueID);
         }
+    }
+
+    public static int GetIndexByUniqueID(string uniqueID)
+    {
+        if(Instance != null)
+        {
+            for(int i = 0; i < Instance.m_items.Count; i++)
+            {
+                if(Instance.m_items[i].m_UniqueID == uniqueID)
+                {
+                    return i;
+                }
+            }
+        }
+        
+        return -1;
     }
 }

@@ -17,6 +17,35 @@ public class Inventory : MonoBehaviour
     }
 
     public List<InventoryItem> m_InventoryItems = new List<InventoryItem>();
+    
+    void Start()
+    {
+        CraftPatternPlayer.m_craftSequenceStarted += OnCraftStart;
+        CraftPatternPlayer.m_craftSequenceEnded += OnCraftEnd;
+    }
+
+    void OnDestroy()
+    {
+        CraftPatternPlayer.m_craftSequenceStarted -= OnCraftStart;
+        CraftPatternPlayer.m_craftSequenceEnded -= OnCraftEnd;
+    }
+
+    void OnCraftStart(ItemData itemData)
+    {
+        for(int i = 0; i < itemData.m_Recipe.m_ItemsNeeded.Count; i++)
+        {
+            RemoveItem(ItemDatabase.GetItemByUniqueID(itemData.m_Recipe.m_ItemsNeeded[i].m_itemID), itemData.m_Recipe.m_ItemsNeeded[i].m_itemCount);
+        }
+    }
+
+    void OnCraftEnd(ItemData itemData, CraftState state)
+    {
+        if(state == CraftState.Success)
+        {
+            AddItem(itemData, 1);
+        }
+    }
+    
 
     bool HasItem(ItemData item, int count)
     {
@@ -42,8 +71,11 @@ public class Inventory : MonoBehaviour
                 if(m_InventoryItems[i].m_ItemData == item)
                 {
                     m_InventoryItems[i].m_Count += count;
+                    return;
                 }
             }
+
+            m_InventoryItems.Add(new InventoryItem(item, count));
         }
         else
         {

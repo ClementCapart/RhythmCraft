@@ -18,6 +18,14 @@ public enum TokenType
 	Durability
 }
 
+public enum TokenState
+{
+    Invalid,
+    Running,
+    Success,
+    Fail,
+}
+
 public class CraftToken
 {
 	const float TIME_TO_DISPLAY = 3.0f;
@@ -28,7 +36,7 @@ public class CraftToken
     float		m_timeLeft	= float.MaxValue;
 	float		m_speed = 0.0f;
 
-	public bool m_toBeDestroyed = false;
+	public  TokenState m_State = TokenState.Invalid;
 	private GameObject m_TokenObject = null;
 	private RectTransform m_TokenRectTransform = null;
 
@@ -43,12 +51,13 @@ public class CraftToken
 
 	public CraftToken(Direction direction, TokenType type, float timeLeft)
 	{
+        m_State = TokenState.Running;
 		m_direction = direction;
 		m_type = type;
 		m_timeLeft = timeLeft;
 	}
 
-	public void SubUpdate()
+	public TokenState SubUpdate()
 	{
 		m_timeLeft -= Time.deltaTime;
 		
@@ -63,6 +72,8 @@ public class CraftToken
 		{
 			CheckValidation();
 		}
+
+        return m_State;
 	}
 
 	private void CheckValidation()
@@ -80,12 +91,12 @@ public class CraftToken
 	private void Validate(bool passed)
 	{
 		OnTokenCheck(passed);
+        m_State = passed ? TokenState.Success : TokenState.Fail;
 		Destroy();
 	}
 
 	private void Destroy()
 	{
-		m_toBeDestroyed = true;
 		GameObject.Destroy(m_TokenObject);
 	}
 
