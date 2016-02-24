@@ -73,6 +73,7 @@ public class Inventory : MonoBehaviour
                 if(m_InventoryItems[i].m_ItemData == item)
                 {
                     m_InventoryItems[i].m_Count += count;
+                    if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
                     return;
                 }
             }
@@ -96,6 +97,7 @@ public class Inventory : MonoBehaviour
                 if(m_InventoryItems[i].m_Count > count)
                 {
                     m_InventoryItems[i].m_Count -= count;
+                    if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
                     return;
                 }
                 else
@@ -104,8 +106,11 @@ public class Inventory : MonoBehaviour
                     m_InventoryItems.RemoveAt(i);
                 }
 
-                if(count <= 0)
+                if (count <= 0)
+                {
+                    if (s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
                     return;
+                }
             }
         }
 

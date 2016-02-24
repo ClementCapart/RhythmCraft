@@ -5,8 +5,13 @@ using System.Collections.Generic;
 public class RecipeController : MonoBehaviour 
 {
     List<ItemData> m_AvailableCrafts = new List<ItemData>();
+    
+    public CraftPatternPlayer m_CraftPatternPlayer = null;
+    public List<Buttons> m_ButtonPerIndex = new List<Buttons>();
 
-    ItemData[] m_UsableRecipes = new ItemData[4];
+    Dictionary<Buttons, ItemData> m_UsableRecipes = new Dictionary<Buttons,ItemData>();
+    public delegate void UsableRecipesUpdated(Dictionary<Buttons, ItemData> usableRecipes);
+    public static UsableRecipesUpdated s_usableRecipesUpdated;
 
     void Start()
     {
@@ -17,6 +22,21 @@ public class RecipeController : MonoBehaviour
     void OnDestroy()
     {
         Inventory.s_onUpdateInventory -= UpdateAvailableCrafts;
+    }
+
+    void Update()
+    {
+        if (m_CraftPatternPlayer && !m_CraftPatternPlayer.m_IsPlaying)
+        {
+            foreach (KeyValuePair<Buttons, ItemData> kvp in m_UsableRecipes)
+            {
+                if (XInput.GetButtonDown(kvp.Key, 0))
+                {
+                    m_CraftPatternPlayer.StartPattern(kvp.Value);
+                    break;
+                }
+            }
+        }
     }
 
     void UpdateAvailableCrafts(List<Inventory.InventoryItem> inventoryData)
@@ -71,5 +91,34 @@ public class RecipeController : MonoBehaviour
                 m_AvailableCrafts.Add(itemData[i]);
             }
         }
+
+        UpdateRecipeInput();
+    }
+
+    void UpdateRecipeInput()
+    {    
+        m_UsableRecipes.Clear();
+
+        for (int i = 0; i < m_ButtonPerIndex.Count; i++)
+        {
+            if(i < m_AvailableCrafts.Count)
+            {
+                m_UsableRecipes.Add(GetInputPerIndex(i), m_AvailableCrafts[i]);
+            }
+            else
+            {
+                m_UsableRecipes.Add(GetInputPerIndex(i), null);
+            }
+        }
+
+        if(s_usableRecipesUpdated != null) s_usableRecipesUpdated(m_UsableRecipes);
+    }
+
+    Buttons GetInputPerIndex(int index)
+    {
+        if(index < m_ButtonPerIndex.Count)
+            return m_ButtonPerIndex[index];
+
+        return Buttons.None;
     }
 }

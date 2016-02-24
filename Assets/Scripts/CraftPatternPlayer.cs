@@ -29,9 +29,10 @@ public class CraftPatternPlayer : MonoBehaviour
     public delegate void CraftSequenceEnded(ItemData item, CraftState state);
     public static CraftSequenceEnded s_craftSequenceEnded;
 
+    public bool m_IsPlaying = false;
+
     void Start()
     {
-        StartPattern(ItemDatabase.GetItemByIndex(0));
     }
 
     void Reset()
@@ -43,7 +44,7 @@ public class CraftPatternPlayer : MonoBehaviour
         m_currentItemData = null;
     }
 
-    void StartPattern(ItemData item)
+    public void StartPattern(ItemData item)
     {
         Reset();
         if(item != null)
@@ -54,6 +55,7 @@ public class CraftPatternPlayer : MonoBehaviour
             {
                 s_craftSequenceStarted(item);
             }
+            m_IsPlaying = true;
         }
     }
 
@@ -102,6 +104,7 @@ public class CraftPatternPlayer : MonoBehaviour
     {                
         CraftState endState = CheckEndCraftState();
         
+        m_IsPlaying = false;
         if(s_craftSequenceEnded != null)
         {
             s_craftSequenceEnded(m_currentItemData, endState);
