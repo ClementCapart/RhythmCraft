@@ -19,6 +19,7 @@ public class ButtonRecipeUI : MonoBehaviour
 
 	public void UpdateRecipe(ItemData itemData)
     {
+        m_item = itemData;
         if(m_RecipeObject != null)
         {
             m_RecipeObject.UpdateRecipe(itemData);

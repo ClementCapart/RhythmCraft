@@ -6,7 +6,7 @@ public class RecipeControllerUI : MonoBehaviour
 {
     List<ButtonRecipeUI> m_ButtonsUI = new List<ButtonRecipeUI>();
 
-    void Start()
+    void Awake()
     {
         RecipeController.s_usableRecipesUpdated += UpdateUI;
 
