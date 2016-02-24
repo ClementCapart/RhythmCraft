@@ -52,7 +52,7 @@ public class ItemDatabaseEditor : Editor
                     GUI.enabled = true;
 
                     item.m_Name = EditorGUILayout.TextField("Name", item.m_Name);                    
-                    item.m_ItemIcon = EditorGUILayout.ObjectField("Icon", item.m_ItemIcon, typeof(Texture), false) as Texture;
+                    item.m_ItemIcon = EditorGUILayout.ObjectField("Icon", item.m_ItemIcon, typeof(Sprite), false) as Sprite;
                     item.m_IsStackable = EditorGUILayout.Toggle("Is Stackable", item.m_IsStackable);
                     item.m_TypeFlags = (ItemType)EditorGUILayout.EnumMaskField("Type", item.m_TypeFlags);
                     item.m_CraftPattern = EditorGUILayout.ObjectField("Craft Pattern", item.m_CraftPattern, typeof(AnimationClip), false) as AnimationClip;                    

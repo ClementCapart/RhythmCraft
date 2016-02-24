@@ -16,18 +16,20 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public delegate void OnUpdateInventoryDelegate(List<InventoryItem> inventory);
+    public static OnUpdateInventoryDelegate s_onUpdateInventory;
     public List<InventoryItem> m_InventoryItems = new List<InventoryItem>();
     
     void Start()
     {
-        CraftPatternPlayer.m_craftSequenceStarted += OnCraftStart;
-        CraftPatternPlayer.m_craftSequenceEnded += OnCraftEnd;
+        CraftPatternPlayer.s_craftSequenceStarted += OnCraftStart;
+        CraftPatternPlayer.s_craftSequenceEnded += OnCraftEnd;
     }
 
     void OnDestroy()
     {
-        CraftPatternPlayer.m_craftSequenceStarted -= OnCraftStart;
-        CraftPatternPlayer.m_craftSequenceEnded -= OnCraftEnd;
+        CraftPatternPlayer.s_craftSequenceStarted -= OnCraftStart;
+        CraftPatternPlayer.s_craftSequenceEnded -= OnCraftEnd;
     }
 
     void OnCraftStart(ItemData itemData)
@@ -81,6 +83,8 @@ public class Inventory : MonoBehaviour
         {
             m_InventoryItems.Add(new InventoryItem(item, count));
         }
+
+        if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
     }
 
     void RemoveItem(ItemData item, int count)
@@ -104,5 +108,7 @@ public class Inventory : MonoBehaviour
                     return;
             }
         }
+
+        if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
     }
 }

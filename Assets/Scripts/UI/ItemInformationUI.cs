@@ -12,14 +12,14 @@ public class ItemInformationUI : MonoBehaviour
             m_Text.text = "";
         }
 
-        CraftPatternPlayer.m_craftSequenceStarted += OnStartSequence;
-        CraftPatternPlayer.m_craftSequenceEnded += OnEndSequence;
+        CraftPatternPlayer.s_craftSequenceStarted += OnStartSequence;
+        CraftPatternPlayer.s_craftSequenceEnded += OnEndSequence;
     }
 
     void OnDestroy()
     {
-        CraftPatternPlayer.m_craftSequenceStarted -= OnStartSequence;
-        CraftPatternPlayer.m_craftSequenceEnded -= OnEndSequence;
+        CraftPatternPlayer.s_craftSequenceStarted -= OnStartSequence;
+        CraftPatternPlayer.s_craftSequenceEnded -= OnEndSequence;
     }
 
     void OnStartSequence(ItemData item)

@@ -24,10 +24,10 @@ public class CraftPatternPlayer : MonoBehaviour
     private ItemData m_currentItemData;
 
     public delegate void CraftSequenceStarted(ItemData item);
-    public static CraftSequenceStarted m_craftSequenceStarted;
+    public static CraftSequenceStarted s_craftSequenceStarted;
 
     public delegate void CraftSequenceEnded(ItemData item, CraftState state);
-    public static CraftSequenceEnded m_craftSequenceEnded;
+    public static CraftSequenceEnded s_craftSequenceEnded;
 
     void Start()
     {
@@ -50,9 +50,9 @@ public class CraftPatternPlayer : MonoBehaviour
         {
             m_currentItemData = item;
             m_Animator.Play(item.m_CraftPattern.name);
-            if(m_craftSequenceStarted != null)
+            if(s_craftSequenceStarted != null)
             {
-                m_craftSequenceStarted(item);
+                s_craftSequenceStarted(item);
             }
         }
     }
@@ -102,9 +102,9 @@ public class CraftPatternPlayer : MonoBehaviour
     {                
         CraftState endState = CheckEndCraftState();
         
-        if(m_craftSequenceEnded != null)
+        if(s_craftSequenceEnded != null)
         {
-            m_craftSequenceEnded(m_currentItemData, endState);
+            s_craftSequenceEnded(m_currentItemData, endState);
         }        
 
         Reset();

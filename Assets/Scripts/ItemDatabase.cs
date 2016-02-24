@@ -9,7 +9,7 @@ public class ItemData
     public string m_UniqueID = System.Guid.Empty.ToString();
 
 	public string m_Name = "DefaultItemName";
-    public Texture m_ItemIcon;
+    public Sprite m_ItemIcon;
     public bool m_IsStackable = true;
     public ItemType m_TypeFlags = 0x0;
     public AnimationClip m_CraftPattern = null;
