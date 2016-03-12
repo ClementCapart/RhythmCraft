@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.IO;
 
 public class AssetCustomImporter : AssetPostprocessor 
 {
@@ -11,6 +12,55 @@ public class AssetCustomImporter : AssetPostprocessor
         if(modelImporter)
         {
             modelImporter.materialName = ModelImporterMaterialName.BasedOnMaterialName;
+            modelImporter.useFileUnits = true;
         }
+    }
+
+    void OnPostprocessModel(GameObject result)
+    {
+        ModelImporter modelImporter = assetImporter as ModelImporter;
+        if(Path.GetExtension(modelImporter.assetPath) == ".max")
+        {
+            RotateObject(result.transform);
+        }
+
+        result.transform.rotation = Quaternion.identity;
+    }
+
+    private void RotateObject(Transform transform)
+    {
+        // Use that version if you want to avoid lots of decimal unprecision due to Quaternion rotation
+        /*Vector3 objectRotation = transform.eulerAngles;
+        objectRotation.x += 90.0f;
+        transform.eulerAngles = objectRotation;*/
+
+        transform.Rotate(Vector3.right, 90.0f);
+
+        MeshFilter meshFilter = transform.GetComponent<MeshFilter>();
+        if(meshFilter)
+        {
+            RotateMesh(meshFilter.sharedMesh);
+        }
+
+        foreach(Transform child in transform)
+        {
+            RotateObject(child);
+        }
+    }
+
+    private void RotateMesh(Mesh mesh)
+    {
+        int index = 0;
+
+        Vector3[] vertices= mesh.vertices;
+        for(index = 0; index < vertices.Length; index++)
+        {
+            vertices[index] = Quaternion.AngleAxis(-90.0f, Vector3.right) * vertices[index];
+        }
+
+        mesh.vertices = vertices;        
+
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
     }
 }
