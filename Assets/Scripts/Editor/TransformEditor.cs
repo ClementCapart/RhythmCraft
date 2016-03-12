@@ -14,7 +14,7 @@ public class TransformEditor : Editor
 	{
 		Transform transform = (Transform)target;
 
-		EditorGUIUtility.LookLikeControls();
+		//EditorGUIUtility.LookLikeControls();
 		EditorGUI.indentLevel = 0;
 
 		GUILayout.BeginHorizontal();

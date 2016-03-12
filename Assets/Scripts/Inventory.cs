@@ -46,7 +46,9 @@ public class Inventory : MonoBehaviour
         {
             itemData.m_AlreadyCrafted = true;
             AddItem(itemData, 1);
-        }
+
+            StimEntertainment.EmitStim(new StimEntertainment(30.0f));
+        }        
     }
     
 

@@ -14,11 +14,11 @@ public class ItemData
     public ItemType m_TypeFlags = 0x0;
     public AnimationClip m_CraftPattern = null;
 
-    public bool m_AlreadyCrafted = false;
-
     public RecipeData m_Recipe = new RecipeData();
-}
 
+    [System.NonSerialized]
+    public bool m_AlreadyCrafted = false;
+}
 
 [System.Serializable]
 public class RecipeData
