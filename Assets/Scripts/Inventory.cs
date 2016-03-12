@@ -44,6 +44,7 @@ public class Inventory : MonoBehaviour
     {
         if(state == CraftState.Success)
         {
+            itemData.m_AlreadyCrafted = true;
             AddItem(itemData, 1);
         }
     }

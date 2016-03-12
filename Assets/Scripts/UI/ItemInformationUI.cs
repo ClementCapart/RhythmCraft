@@ -26,7 +26,10 @@ public class ItemInformationUI : MonoBehaviour
     {
         if(m_Text != null)
         {
-            m_Text.text = item.m_Name;
+            if(item.m_AlreadyCrafted)
+                m_Text.text = item.m_Name;
+            else
+                m_Text.text = "??????";
         }
     }
 

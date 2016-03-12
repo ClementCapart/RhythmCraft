@@ -14,6 +14,8 @@ public class ItemData
     public ItemType m_TypeFlags = 0x0;
     public AnimationClip m_CraftPattern = null;
 
+    public bool m_AlreadyCrafted = false;
+
     public RecipeData m_Recipe = new RecipeData();
 }
 
