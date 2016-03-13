@@ -24,17 +24,22 @@ public class AssetCustomImporter : AssetPostprocessor
             RotateObject(result.transform);
         }
 
-        result.transform.rotation = Quaternion.identity;
+        //result.transform.rotation = Quaternion.identity;
     }
 
-    private void RotateObject(Transform transform)
+    private void RotateObject(Transform transform, bool meshOnly = false)
     {
-        // Use that version if you want to avoid lots of decimal unprecision due to Quaternion rotation
-        /*Vector3 objectRotation = transform.eulerAngles;
-        objectRotation.x += 90.0f;
-        transform.eulerAngles = objectRotation;*/
+        if(!meshOnly)
+        {
+            Vector3 objectRotation = transform.eulerAngles;
+            objectRotation.x += 90.0f;
+            transform.eulerAngles = objectRotation;
 
-        transform.Rotate(Vector3.right, 90.0f);
+            //transform.Rotate(Vector3.right, 90.0f);
+        }
+
+        Vector3 newPos = new Vector3(transform.position.x, transform.position.z, transform.position.y);
+        transform.position = newPos;        
 
         MeshFilter meshFilter = transform.GetComponent<MeshFilter>();
         if(meshFilter)
@@ -44,7 +49,7 @@ public class AssetCustomImporter : AssetPostprocessor
 
         foreach(Transform child in transform)
         {
-            RotateObject(child);
+            RotateObject(child, true);
         }
     }
 
