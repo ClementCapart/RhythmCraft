@@ -47,6 +47,9 @@ public class RecipeController : MonoBehaviour
 
         for(int i = 0; i < itemData.Count; i++)
         {
+            if(!itemData[i].m_Enabled)
+                continue;
+
             if(itemData[i].m_Recipe.m_ItemsNeeded != null && itemData[i].m_Recipe.m_ItemsNeeded.Count > 0)
             {
                 if(inventoryData == null || inventoryData.Count == 0)

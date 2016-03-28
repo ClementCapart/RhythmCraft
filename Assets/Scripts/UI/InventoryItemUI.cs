@@ -5,16 +5,26 @@ using System.Collections;
 public class InventoryItemUI : MonoBehaviour 
 {    
     Inventory.InventoryItem m_item = null;
+    public bool IsEmpty
+    {
+        get { return m_item == null; }
+    }
     
     public Image m_Icon = null;
     public Text m_NumberText = null;
 
     public Sprite m_MissingIconSprite = null;
 
+    public Button m_Button = null;
+
 	void Start () 
     {	    
         UpdateItem(null);
 	}		
+
+    public void OnConfirm()
+    {
+    }
 
     public void UpdateItem(Inventory.InventoryItem item)
     {
@@ -48,5 +58,13 @@ public class InventoryItemUI : MonoBehaviour
                 m_NumberText.gameObject.SetActive(false);
             }            
         }
+    }
+
+    public void Select()
+    {
+    }
+
+    public void UnSelect()
+    {
     }
 }

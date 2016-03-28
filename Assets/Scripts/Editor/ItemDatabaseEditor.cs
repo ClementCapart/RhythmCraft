@@ -51,6 +51,7 @@ public class ItemDatabaseEditor : Editor
                     EditorGUILayout.TextField("Unique ID", item.m_UniqueID.ToString());
                     GUI.enabled = true;
 
+                    item.m_Enabled = EditorGUILayout.Toggle("Enabled", item.m_Enabled);
                     item.m_Name = EditorGUILayout.TextField("Name", item.m_Name);                    
                     item.m_ItemIcon = EditorGUILayout.ObjectField("Icon", item.m_ItemIcon, typeof(Sprite), false) as Sprite;
                     item.m_IsStackable = EditorGUILayout.Toggle("Is Stackable", item.m_IsStackable);

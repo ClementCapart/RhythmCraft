@@ -31,7 +31,7 @@ public class CraftToken
 	const float TIME_TO_DISPLAY = 3.0f;
 
 	Direction	m_direction	= Direction.None;
-	TokenType	m_type		= TokenType.None;
+	//TokenType	m_type		= TokenType.None;
 
     float		m_timeLeft	= float.MaxValue;
 	float		m_speed = 0.0f;
@@ -53,7 +53,7 @@ public class CraftToken
 	{
         m_State = TokenState.Running;
 		m_direction = direction;
-		m_type = type;
+		//m_type = type;
 		m_timeLeft = timeLeft;
 	}
 

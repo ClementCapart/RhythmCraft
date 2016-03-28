@@ -24,6 +24,11 @@ public class Inventory : MonoBehaviour
     {
         CraftPatternPlayer.s_craftSequenceStarted += OnCraftStart;
         CraftPatternPlayer.s_craftSequenceEnded += OnCraftEnd;
+        
+        //Test
+        AddItem(ItemDatabase.GetItemByIndex(0), 3);
+        AddItem(ItemDatabase.GetItemByIndex(1), 1);
+        AddItem(ItemDatabase.GetItemByIndex(2), 2);
     }
 
     void OnDestroy()

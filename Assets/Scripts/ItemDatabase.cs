@@ -6,6 +6,8 @@ using System.Linq;
 [System.Serializable]
 public class ItemData
 {
+    public bool m_Enabled = false;
+
     public string m_UniqueID = System.Guid.Empty.ToString();
 
 	public string m_Name = "DefaultItemName";
@@ -17,7 +19,7 @@ public class ItemData
     public RecipeData m_Recipe = new RecipeData();
 
     [System.NonSerialized]
-    public bool m_AlreadyCrafted = false;
+    public bool m_AlreadyCrafted = true;
 }
 
 [System.Serializable]

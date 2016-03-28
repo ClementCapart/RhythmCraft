@@ -55,7 +55,7 @@ public class ControllerUI : MonoBehaviour
 				break;
 		}
 		if(m_currentDirection != null)
-			StartCoroutine(ChangeImageColor(m_currentDirection, m_ActiveDirectionColor));
+			StartCoroutine(ChangeImageColor(m_currentDirection,m_ActiveDirectionColor));
 	}
 
 	void FeedbackCheck(bool state)

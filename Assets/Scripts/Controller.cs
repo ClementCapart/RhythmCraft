@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
 public class Controller : MonoBehaviour
@@ -32,30 +33,38 @@ public class Controller : MonoBehaviour
 
 	void Update()
 	{
-		if (XInput.GetButton(Buttons.LeftStickUp, 0))
+        if (XInput.GetButton(Buttons.LeftStickUp, 0) || Input.GetKey(KeyCode.UpArrow))
 		{
-			ChangeDirection(Direction.Up);
+			TryChangeDirection(Direction.Up);
 		}
-		else if (XInput.GetButton(Buttons.LeftStickRight, 0))
+		else if (XInput.GetButton(Buttons.LeftStickRight, 0) || Input.GetKey(KeyCode.RightArrow))
 		{
-			ChangeDirection(Direction.Right);
+			TryChangeDirection(Direction.Right);
 		}
-		else if (XInput.GetButton(Buttons.LeftStickDown, 0))
+		else if (XInput.GetButton(Buttons.LeftStickDown, 0) || Input.GetKey(KeyCode.DownArrow))
 		{
-			ChangeDirection(Direction.Down);
+			TryChangeDirection(Direction.Down);
 		}
-		else if (XInput.GetButton(Buttons.LeftStickLeft, 0))
+		else if (XInput.GetButton(Buttons.LeftStickLeft, 0) || Input.GetKey(KeyCode.LeftArrow))
 		{
-			ChangeDirection(Direction.Left);
+			TryChangeDirection(Direction.Left);
 		}
 		else
 		{
-			ChangeDirection(Direction.None);
-		}
+			TryChangeDirection(Direction.None);
+		}	
+	}
+
+    void TryChangeDirection(Direction newDirection)
+	{
+		if (m_currentDirection != newDirection)
+		{
+			ChangeDirection(newDirection);
+		}	
 	}
 
 	void ChangeDirection(Direction newDirection)
-	{
+	{     
 		if (m_currentDirection != newDirection)
 		{
 			m_currentDirection = newDirection;
