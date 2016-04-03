@@ -26,7 +26,7 @@ public class RecipeController : MonoBehaviour
 
     void Update()
     {
-        if (m_CraftPatternPlayer && !m_CraftPatternPlayer.m_IsPlaying)
+        if (m_CraftPatternPlayer && m_CraftPatternPlayer.m_State == CraftPatternPlayer.PlayerState.Stopped)
         {
             foreach (KeyValuePair<Buttons, ItemData> kvp in m_UsableRecipes)
             {

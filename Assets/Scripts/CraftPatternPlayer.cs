@@ -13,15 +13,27 @@ public enum CraftState
 
 public class CraftPatternPlayer : MonoBehaviour 
 {
-	List<CraftToken> m_currentTokens = new List<CraftToken>();
-	
-	public Animator m_Animator = null;
-    private bool m_toEnd = false;
+    public enum PlayerState
+    {
+        Stopped,
+        Playing,
+        Paused,
+    }
 
-    private int m_totalTokenCount = 0;
-    private int m_successTokenCount = 0;
+    public enum SettingToTest
+    {
+        First,
+        Second,
+        Third,
+        Fourth,
+    }
 
-    private ItemData m_currentItemData;
+    public SettingToTest m_SettingsToTest;
+
+    public PlayerState m_State = PlayerState.Stopped;
+    public float m_PlayerSpeed = 1.0f;
+    public float m_NoteTimeOnScreen = 1.0f;
+    public bool m_UseCurrentNextFeedback = false;
 
     public delegate void CraftSequenceStarted(ItemData item);
     public static CraftSequenceStarted s_craftSequenceStarted;
@@ -29,19 +41,48 @@ public class CraftPatternPlayer : MonoBehaviour
     public delegate void CraftSequenceEnded(ItemData item, CraftState state);
     public static CraftSequenceEnded s_craftSequenceEnded;
 
-    public bool m_IsPlaying = false;
-
     void Start()
     {
     }
 
     void Reset()
     {
-        m_totalTokenCount = 0;
-        m_successTokenCount = 0;
-        m_toEnd = false;
-        m_currentTokens.Clear();
-        m_currentItemData = null;
+        m_State = PlayerState.Stopped;
+    }
+
+    void OnValidate()
+    {
+        SwitchSettings();
+    }
+
+    void SwitchSettings()
+    {
+        switch(m_SettingsToTest)
+        {
+            case SettingToTest.First:
+                m_PlayerSpeed = 2.5f;
+                m_NoteTimeOnScreen = 1.0f;
+                m_UseCurrentNextFeedback = false;
+                break;
+
+            case SettingToTest.Second:
+                m_PlayerSpeed = 2.5f;
+                m_NoteTimeOnScreen = 2.0f;
+                m_UseCurrentNextFeedback = true;
+                break;
+
+            case SettingToTest.Third:
+                m_PlayerSpeed = 2.5f;
+                m_NoteTimeOnScreen = 0.8f;
+                m_UseCurrentNextFeedback = true;
+                break;
+
+            case SettingToTest.Fourth:
+                m_PlayerSpeed = 2.0f;
+                m_NoteTimeOnScreen = 1.5f;
+                m_UseCurrentNextFeedback = true;
+                break;
+        }
     }
 
     public void StartPattern(ItemData item)
@@ -49,73 +90,107 @@ public class CraftPatternPlayer : MonoBehaviour
         Reset();
         if(item != null)
         {
-            m_currentItemData = item;
-            m_Animator.Play(item.m_CraftPattern.name);
-            if(s_craftSequenceStarted != null)
-            {
-                s_craftSequenceStarted(item);
-            }
-            m_IsPlaying = true;
+            StartCoroutine(PlayPattern(item));            
         }
     }
 
-	public void AddNewToken(AnimationEvent eventInfo)
+	public CraftToken CreateNewToken(CraftPattern.PatternNote note)
 	{
-		Direction tokenDirection = (Direction)Enum.Parse(typeof(Direction), eventInfo.stringParameter);
-		TokenType tokenType = (TokenType)eventInfo.intParameter;
-		float delay = eventInfo.floatParameter;				
-
-        m_totalTokenCount++;
-		m_currentTokens.Add(new CraftToken(tokenDirection, tokenType, delay));
+		return new CraftToken(note.m_Direction, m_NoteTimeOnScreen);
 	}
 
-	void Update()
-	{
-		for (int i = m_currentTokens.Count - 1; i >= 0; i--)
-		{
-			TokenState state = m_currentTokens[i].SubUpdate();
-            if (state != TokenState.Running)
+	IEnumerator PlayPattern(ItemData item)
+	{        
+        CraftPattern.PatternNote[] notes = item.m_CraftPattern.GetPattern();
+
+        if(notes.Length == 0)
+            yield break;
+
+        List<CraftToken> currentTokens = new List<CraftToken>();
+        int currentNote = 0;
+        int successTokenCount = 0;
+        float currentDelay = notes[currentNote].m_Delay;
+
+        m_State = PlayerState.Playing;
+
+        if(s_craftSequenceStarted != null)
+        {
+            s_craftSequenceStarted(item);
+        }
+
+        while(m_State == PlayerState.Playing)
+        {    
+            if(currentNote < notes.Length)
             {
-                if(state == TokenState.Success)
-                    m_successTokenCount++;
-                m_currentTokens.RemoveAt(i);                
+                currentDelay -= Time.deltaTime * m_PlayerSpeed;
+
+                if(currentDelay <= 0.0f)
+                {
+                    currentTokens.Add(CreateNewToken(notes[currentNote]));
+                    
+                    if(m_UseCurrentNextFeedback)
+                    {
+                        if(currentTokens.Count == 1)
+                        {
+                            currentTokens[0].SetAsCurrent();
+                        }
+                        else if(currentTokens.Count == 2)
+                        {
+                            currentTokens[1].SetAsNext();
+                        }
+                    }                    
+
+                    currentNote++;
+                    if(currentNote < notes.Length)
+                    {
+                        currentDelay += notes[currentNote].m_Delay;
+                    }
+                }
+            }        
+            else if(currentTokens.Count == 0)
+            {
+                m_State = PlayerState.Stopped;
             }
-		}
 
-        if(m_toEnd && m_currentTokens.Count == 0)
-        {
-            EndPattern();
-        }
-	}
+            for (int i = currentTokens.Count - 1; i >= 0; i--)
+		    {
+			    TokenState state = currentTokens[i].SubUpdate();
+                if (state != TokenState.Running)
+                {
+                    if(state == TokenState.Success)
+                        successTokenCount++;
+                    currentTokens.RemoveAt(i);
 
-    public void SignalEnd()
-    {
-        if(m_currentTokens.Count < 0)
-        {
-            EndPattern();
-        }
-        else
-        {
-            m_toEnd = true;
-        }
-    }
+                    if (m_UseCurrentNextFeedback)
+                    {
+                        if (currentTokens.Count >= 1)
+                        {
+                            currentTokens[0].SetAsCurrent();
+                        }
+                        if (currentTokens.Count >= 2)
+                        {
+                            currentTokens[1].SetAsNext();
+                        }
+                    }
+                }
+		    }
 
-    void EndPattern()
-    {                
-        CraftState endState = CheckEndCraftState();
+            yield return 0;          
+        }
+		
+        CraftState endState = CheckEndCraftState(successTokenCount, notes.Length);
         
-        m_IsPlaying = false;
         if(s_craftSequenceEnded != null)
         {
-            s_craftSequenceEnded(m_currentItemData, endState);
+            s_craftSequenceEnded(item, endState);
         }        
 
-        Reset();
-    }
+        Reset();        
+	}
 
-    CraftState CheckEndCraftState()
+    CraftState CheckEndCraftState(int successTokenCount, int totalTokenCount)
     {
-        float successRate = (float)m_successTokenCount / (float)m_totalTokenCount; 
+        float successRate = (float)successTokenCount / (float)totalTokenCount; 
         
         Debug.Log("EndPattern - Success Rate: " + successRate * 100.0f + "%");        
 

@@ -37,6 +37,8 @@ public class CraftToken
 	float		m_speed = 0.0f;
 
 	public  TokenState m_State = TokenState.Invalid;
+    private  int m_tokenIndex = -1;
+    private bool m_isDirty = false;
 	private GameObject m_TokenObject = null;
 	private RectTransform m_TokenRectTransform = null;
 
@@ -49,7 +51,7 @@ public class CraftToken
 		set { s_onTokenCheck = value; }
 	}
 
-	public CraftToken(Direction direction, TokenType type, float timeLeft)
+	public CraftToken(Direction direction, float timeLeft)
 	{
         m_State = TokenState.Running;
 		m_direction = direction;
@@ -72,6 +74,18 @@ public class CraftToken
 		{
 			CheckValidation();
 		}
+
+        if(m_isDirty)
+        {
+            if(m_tokenIndex == 0)
+            {
+                InternalSetAsCurrent();
+            }
+            else if(m_tokenIndex == 1)
+            {
+                InternalSetAsNext();
+            }
+        }
 
         return m_State;
 	}
@@ -110,4 +124,40 @@ public class CraftToken
 
 		m_speed = laneRect.rect.width / m_timeLeft;
 	}
+
+    public void SetAsCurrent()
+    {
+        m_tokenIndex = 0;
+        m_isDirty = true;
+    }
+
+    public void SetAsNext()
+    {
+        m_tokenIndex = 1;
+        m_isDirty = true;
+    }
+
+    private void InternalSetAsCurrent()
+    {        
+        if (m_TokenObject)
+        {
+            UnityEngine.UI.Image image = m_TokenObject.GetComponent<UnityEngine.UI.Image>();
+            if(image)
+            {
+                image.color = CraftTokenFolder.CurrentTokenColor;
+            }
+        }
+    }
+
+    private void InternalSetAsNext()
+    {
+        if (m_TokenObject)
+        {
+            UnityEngine.UI.Image image = m_TokenObject.GetComponent<UnityEngine.UI.Image>();
+            if(image)
+            {
+                image.color = CraftTokenFolder.NextTokenColor; 
+            }
+        }   
+    }
 }

@@ -12,6 +12,11 @@ public class CraftTokenFolder : MonoBehaviour
 	public Transform m_DownLane = null;
 	public Transform m_LeftLane = null;
 
+    public Color m_CurrentTokenColor = Color.blue;
+    public static Color CurrentTokenColor { get { return m_instance.m_CurrentTokenColor; } }
+    public Color m_NextTokenColor = Color.green;  
+    public static Color NextTokenColor { get {return m_instance.m_NextTokenColor; } }
+
 	public static GameObject GetTokenPrefab()
 	{
 		if(m_instance != null)

@@ -4,6 +4,117 @@ using System.Collections.Generic;
 using System.Linq;
 
 [System.Serializable]
+public class CraftPattern
+{
+    [System.Serializable]
+    public class PatternNote
+    {
+        public Direction m_Direction = Direction.None;
+        public float m_Delay = 0.0f;
+
+        public string m_Serialized = "";
+
+        public PatternNote(string serialized)
+        {
+            Unserialize(serialized);
+        }
+
+        public void Unserialize(string serialized)
+        {
+            m_Serialized = serialized;
+
+            switch(m_Serialized[0])
+            {
+                case '#':
+                    m_Direction = Direction.None;
+                    break;
+
+                case 'U':
+                    m_Direction = Direction.Up;
+                    break;
+
+                case 'R':
+                    m_Direction = Direction.Right;
+                    break;
+
+                case 'D':
+                    m_Direction = Direction.Down;
+                    break;
+
+                case 'L':
+                    m_Direction = Direction.Left;
+                    break;
+
+                default:
+                    Debug.LogError("CraftNote Parsing: Direction input is wrong, check database.");
+                    break;
+            }
+
+            string delayString = m_Serialized.Remove(0, 1);
+
+            if(!float.TryParse(delayString, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out m_Delay))
+            {
+                Debug.LogError("Craft Note Parsing: Delay input is wrong, check database.");
+            }
+        }
+
+        public override string ToString()
+        {
+            return m_Direction.ToString() + ":" + m_Delay.ToString();
+        }
+    }
+
+    public string m_Serialized = "";
+    private PatternNote[] m_Pattern = null;
+
+    public CraftPattern(string serialized)
+    {
+        Unserialize(serialized);
+    }
+
+    public PatternNote[] GetPattern()
+    {
+        return m_Pattern;
+    }
+
+    public void Unserialize(string serialized)
+    {
+        if(serialized != "")
+            m_Serialized = serialized;
+
+        string[] notes = m_Serialized.Split(' ');
+        m_Pattern = new PatternNote[notes.Length];
+        if(notes != null)
+        {
+            for(int i = 0; i < notes.Length; i ++)
+            {
+                if(notes[i] != "")
+                {
+                    m_Pattern[i] = new PatternNote(notes[i]);
+                }
+            }
+        }        
+    }
+
+    public override string ToString()
+    {
+        string s = "";
+        if(m_Pattern != null)
+        {            
+            for(int i = 0; i < m_Pattern.Length; i ++)
+            {
+                if(m_Pattern[i] != null)
+                {
+                    s += m_Pattern[i].ToString();
+                }
+            }
+        }
+
+        return s;
+    }
+}
+
+[System.Serializable]
 public class ItemData
 {
     public bool m_Enabled = false;
@@ -14,7 +125,8 @@ public class ItemData
     public Sprite m_ItemIcon;
     public bool m_IsStackable = true;
     public ItemType m_TypeFlags = 0x0;
-    public AnimationClip m_CraftPattern = null;
+    //public AnimationClip m_CraftPattern = null;
+    public CraftPattern m_CraftPattern = null;
 
     public RecipeData m_Recipe = new RecipeData();
 
@@ -55,6 +167,7 @@ public class ItemDatabase : AssetSingleton<ItemDatabase>
 		foreach (ItemData item in m_items)
 		{
             m_itemDatabase.Add(item.m_UniqueID, item);
+            item.m_CraftPattern.Unserialize(item.m_CraftPattern.m_Serialized);
 		}
 	}
 
@@ -64,6 +177,7 @@ public class ItemDatabase : AssetSingleton<ItemDatabase>
         foreach (ItemData item in m_items)
         {
             m_itemDatabase.Add(item.m_UniqueID, item);
+            item.m_CraftPattern.Unserialize(item.m_CraftPattern.m_Serialized);
         }
     }
 
