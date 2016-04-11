@@ -82,6 +82,9 @@ public class CraftPattern
         if(serialized != "")
             m_Serialized = serialized;
 
+        if(m_Serialized == null)
+            return;
+
         string[] notes = m_Serialized.Split(' ');
         m_Pattern = new PatternNote[notes.Length];
         if(notes != null)

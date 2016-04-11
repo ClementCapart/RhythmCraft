@@ -96,11 +96,12 @@ public class ItemDatabaseEditor : Editor
 
     private void RemoveFromList(ReorderableList list)
     {       
-        ItemDatabase.RemoveItem(ItemDatabase.GetItemByIndex(m_currentlySelected));
-
+        ItemDatabase.RemoveItem(ItemDatabase.GetItemByIndex(m_currentlySelected));        
+        
         this.serializedObject.ApplyModifiedProperties();
         this.serializedObject.Update();
         list.index = list.serializedProperty.arraySize - 1;
+        list.DoLayoutList();
     }
 
     private void DrawElement(Rect rect, int index, bool selected, bool focused)

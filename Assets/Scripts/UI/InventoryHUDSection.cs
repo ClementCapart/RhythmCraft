@@ -9,8 +9,6 @@ public class InventoryHUDSection : HUDSection
 
     List<InventoryItemUI> m_inventoryData = new List<InventoryItemUI>();
 
-    private GameObject m_latestSelected = null;
-
     public override void OnMaximized()
     {
         base.OnMaximized();
@@ -20,13 +18,13 @@ public class InventoryHUDSection : HUDSection
             m_inventoryData[i].m_Button.interactable = true;
         }        
 
-        if(m_latestSelected) EventSystem.current.SetSelectedGameObject(m_latestSelected);
-        else EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
-    }
+        TrySelectLatest();
+    }  
 
     public override void OnStartMinimize()
-    {
+    {      
         base.OnStartMinimize();
+
         m_latestSelected = EventSystem.current.currentSelectedGameObject;
         EventSystem.current.SetSelectedGameObject(null);
         for(int i = 0; i < m_inventoryData.Count; i++)
@@ -45,6 +43,11 @@ public class InventoryHUDSection : HUDSection
         if (m_InventoryItemsContainer != null)
         {
             m_inventoryData = new List<InventoryItemUI>(m_InventoryItemsContainer.GetComponentsInChildren<InventoryItemUI>(true));
+        }
+
+        for(int i = 0; i < m_inventoryData.Count; i++)
+        {
+            m_inventoryData[i].m_InventoryHUDSection = this;
         }
 	}
 
@@ -66,5 +69,7 @@ public class InventoryHUDSection : HUDSection
                 m_inventoryData[i].UpdateItem(null);
             }
         }
+
+        TrySelectLatest();
     }
 }

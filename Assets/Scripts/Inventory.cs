@@ -8,11 +8,23 @@ public class Inventory : MonoBehaviour
     {
         public ItemData m_ItemData;
         public int m_Count = -1;
+        private Inventory m_currentInventory;
 
-        public InventoryItem(ItemData data, int count)
+        public InventoryItem(ItemData data, int count, Inventory currentInventory)
         {
             m_ItemData = data;
             m_Count = count;
+            m_currentInventory = currentInventory;
+        }
+
+        public void Delete(int count)
+        {
+            m_currentInventory.RemoveItem(this, count);
+        }
+
+        public void Use()
+        {
+
         }
     }
 
@@ -54,8 +66,7 @@ public class Inventory : MonoBehaviour
 
             StimEntertainment.EmitStim(new StimEntertainment(30.0f));
         }        
-    }
-    
+    } 
 
     bool HasItem(ItemData item, int count)
     {
@@ -86,12 +97,26 @@ public class Inventory : MonoBehaviour
                 }
             }
 
-            m_InventoryItems.Add(new InventoryItem(item, count));
+            m_InventoryItems.Add(new InventoryItem(item, count, this));
         }
         else
         {
-            m_InventoryItems.Add(new InventoryItem(item, count));
+            m_InventoryItems.Add(new InventoryItem(item, count, this));
         }
+
+        if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
+    }
+
+    void RemoveItem(InventoryItem item, int count)
+    {
+        if(item.m_Count < count)
+        {
+            m_InventoryItems.Remove(item);
+        }
+        else
+        {
+            item.m_Count -= count;
+        }        
 
         if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
     }

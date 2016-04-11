@@ -4,7 +4,8 @@ using System.Collections;
 
 public class InventoryItemUI : MonoBehaviour 
 {    
-    Inventory.InventoryItem m_item = null;
+    public InventoryHUDSection m_InventoryHUDSection = null;
+    public Inventory.InventoryItem m_item = null;
     public bool IsEmpty
     {
         get { return m_item == null; }
@@ -24,6 +25,7 @@ public class InventoryItemUI : MonoBehaviour
 
     public void OnConfirm()
     {
+        ContextualPopupManager.CreateInventoryItemPopup(this);
     }
 
     public void UpdateItem(Inventory.InventoryItem item)

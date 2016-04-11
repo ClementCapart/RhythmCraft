@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public enum HUDSectionState
 {
@@ -22,6 +23,16 @@ public class HUDSection : MonoBehaviour
     public float m_ScaleDuration = 0.5f;
 
     private RectTransform m_RectTransform = null;
+    protected GameObject m_latestSelected = null;
+
+    public delegate void OnChangeStateDelegate(HUDSectionState state);
+    private OnChangeStateDelegate m_onChangeState = null;
+    public OnChangeStateDelegate OnChangeState
+    {
+        get { return m_onChangeState; }
+        set { m_onChangeState = value; }
+    }
+
 
     public void Initialize()
     {
@@ -120,6 +131,18 @@ public class HUDSection : MonoBehaviour
         }
     }
 
+    public void TrySelectLatest()
+    {
+        /*EventSystem.current.SetSelectedGameObject(null);
+        if(m_latestSelected) EventSystem.current.SetSelectedGameObject(m_latestSelected);
+        else EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);*/
+    }
+
+    public void SetLatestSelected(GameObject latest)
+    {
+        m_latestSelected = latest;
+    }
+
     public virtual void SubUpdate()
     {
 
@@ -127,18 +150,30 @@ public class HUDSection : MonoBehaviour
 
     public virtual void OnStartMaximize()
     {
-
+        if(m_onChangeState != null)
+        {
+            m_onChangeState(HUDSectionState.Maximizing);
+        }
     }
     public virtual void OnMaximized()
     {
-
+        if(m_onChangeState != null)
+        {
+            m_onChangeState(HUDSectionState.Maximized);
+        }
     }
     public virtual void OnStartMinimize()
     {
-
+        if(m_onChangeState != null)
+        {
+            m_onChangeState(HUDSectionState.Minimizing);
+        }
     }
     public virtual void OnMinimized()
     {
-
+        if(m_onChangeState != null)
+        {
+            m_onChangeState(HUDSectionState.Minimized);
+        }
     }
 }
