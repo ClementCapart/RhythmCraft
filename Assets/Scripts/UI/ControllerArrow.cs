@@ -7,13 +7,20 @@ public class ControllerArrow : MonoBehaviour
     public Image m_ArrowImage = null;
     public Image m_FeedbackLightImage = null;
 
+    public float m_FadeTime = 0.5f;
+
+    public void Start()
+    {
+        m_FeedbackLightImage.CrossFadeAlpha(0.0f, 0.0f, false);
+    }
+
     public void Hold()
     {
-        if(m_FeedbackLightImage) m_FeedbackLightImage.enabled = true;
+        m_FeedbackLightImage.CrossFadeAlpha(1.0f, m_FadeTime, false);
     }
 
     public void Release()
-    {
-        if(m_FeedbackLightImage) m_FeedbackLightImage.enabled = false;
+    {      
+        m_FeedbackLightImage.CrossFadeAlpha(0.0f, m_FadeTime, false);
     }
 }
