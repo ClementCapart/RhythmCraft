@@ -15,7 +15,10 @@ public class InventoryHUDSection : HUDSection
 
         for(int i = 0; i < m_inventoryData.Count; i++)
         {
-            m_inventoryData[i].m_Button.interactable = true;
+            if(m_inventoryData[i].gameObject.activeInHierarchy)
+                m_inventoryData[i].m_Button.interactable = true;
+            else
+                m_inventoryData[i].m_Button.interactable = false;
         }        
 
         TrySelectLatest();
@@ -70,6 +73,6 @@ public class InventoryHUDSection : HUDSection
             }
         }
 
-        TrySelectLatest();
+        //TrySelectLatest();
     }
 }

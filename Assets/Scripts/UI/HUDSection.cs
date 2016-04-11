@@ -41,6 +41,9 @@ public class HUDSection : MonoBehaviour
 
     public bool WantsFocus()
     {
+        if(m_Input == Buttons.None)
+            return true;
+
         if(!m_ButtonIsToggle)
         {
             if(XInput.GetButton(m_Input, 0))
@@ -133,8 +136,14 @@ public class HUDSection : MonoBehaviour
 
     public void TrySelectLatest()
     {
-        if(m_latestSelected) EventSystem.current.SetSelectedGameObject(m_latestSelected);
-        else EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+        if (m_latestSelected && m_latestSelected.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(m_latestSelected);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+        }
     }
 
     public void SetLatestSelected(GameObject latest)

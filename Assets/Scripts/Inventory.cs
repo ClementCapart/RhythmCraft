@@ -24,7 +24,15 @@ public class Inventory : MonoBehaviour
 
         public void Use()
         {
-
+            if ((m_ItemData.m_TypeFlags & ItemType.Entertainment) == ItemType.Entertainment)
+            {
+                StimEntertainment.EmitStim(new StimEntertainment(10.0f));
+                Delete(1);
+            }
+            else
+            {
+                Debug.Log("Does nothing!");
+            }            
         }
     }
 
@@ -63,8 +71,6 @@ public class Inventory : MonoBehaviour
         {
             itemData.m_AlreadyCrafted = true;
             AddItem(itemData, 1);
-
-            StimEntertainment.EmitStim(new StimEntertainment(30.0f));
         }        
     } 
 
@@ -109,7 +115,7 @@ public class Inventory : MonoBehaviour
 
     void RemoveItem(InventoryItem item, int count)
     {
-        if(item.m_Count < count)
+        if(item.m_Count <= count)
         {
             m_InventoryItems.Remove(item);
         }
