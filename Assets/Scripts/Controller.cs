@@ -33,7 +33,11 @@ public class Controller : MonoBehaviour
 
 	void Update()
 	{
-        if (XInput.GetButton(Buttons.LeftStickUp, 0) || Input.GetKey(KeyCode.UpArrow))
+        if(HUDSectionSelection.HasSelection())
+        {
+            TryChangeDirection(Direction.None);
+        }
+        else if (XInput.GetButton(Buttons.LeftStickUp, 0) || Input.GetKey(KeyCode.UpArrow))
 		{
 			TryChangeDirection(Direction.Up);
 		}

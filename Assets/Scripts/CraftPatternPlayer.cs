@@ -112,6 +112,7 @@ public class CraftPatternPlayer : MonoBehaviour
         float currentDelay = notes[currentNote].m_Delay;
 
         m_State = PlayerState.Playing;
+        HUDSectionSelection.LockSelection();
 
         if(s_craftSequenceStarted != null)
         {
@@ -184,6 +185,7 @@ public class CraftPatternPlayer : MonoBehaviour
         {
             s_craftSequenceEnded(item, endState);
         }        
+        HUDSectionSelection.UnlockSelection();
 
         Reset();        
 	}

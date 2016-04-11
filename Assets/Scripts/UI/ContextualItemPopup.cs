@@ -8,6 +8,7 @@ public class ContextualItemPopup : ContextualPopup
     public void SetData(InventoryItemUI item)
     {
         m_item = item;
+        m_item.m_Button.interactable = false;
     }
 
     public void OnUse()
@@ -19,6 +20,13 @@ public class ContextualItemPopup : ContextualPopup
     public void OnDelete()
     {
         m_item.m_item.Delete(int.MaxValue);
-        Close();        
+        Close(); 
+        m_item.m_InventoryHUDSection.SetLatestSelected(null);
+    }
+
+    public override void Close()
+    {
+        m_item.m_Button.interactable = true;
+        base.Close();
     }
 }

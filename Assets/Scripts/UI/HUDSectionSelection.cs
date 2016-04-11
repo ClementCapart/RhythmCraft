@@ -1,10 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HUDSectionSelection : MonoBehaviour 
+public class HUDSectionSelection : Singleton<HUDSectionSelection>
 {
     public HUDSection[] m_HUDSections = null;
     private HUDSection m_CurrentSelection = null;
+    private bool m_Locked = false;
+
+    public static bool HasSelection()
+    {
+        if(Instance && Instance.m_CurrentSelection != null)
+            return true;
+
+        return false;
+    }
+
+    public static void LockSelection()
+    {
+        if(Instance)
+            Instance.m_Locked = true;
+    }
+
+    public static void UnlockSelection()
+    {
+        if(Instance)
+            Instance.m_Locked = false;
+    }
 
     void Awake()
     {
@@ -20,7 +41,7 @@ public class HUDSectionSelection : MonoBehaviour
         {
             if(m_CurrentSelection.m_State == HUDSectionState.Maximized)
             {
-                if(!m_CurrentSelection.WantsFocus())
+                if(!m_CurrentSelection.WantsFocus() || m_Locked)
                 {
                     m_CurrentSelection.Minimize();
                 }
@@ -34,7 +55,7 @@ public class HUDSectionSelection : MonoBehaviour
                 m_CurrentSelection = null;
             }
         }
-        else
+        else if(!m_Locked)
         {
             for(int i = 0; i < m_HUDSections.Length; i++)
             {
