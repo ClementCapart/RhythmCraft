@@ -133,9 +133,8 @@ public class HUDSection : MonoBehaviour
 
     public void TrySelectLatest()
     {
-        /*EventSystem.current.SetSelectedGameObject(null);
         if(m_latestSelected) EventSystem.current.SetSelectedGameObject(m_latestSelected);
-        else EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);*/
+        else EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
     }
 
     public void SetLatestSelected(GameObject latest)

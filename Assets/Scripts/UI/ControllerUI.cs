@@ -4,22 +4,19 @@ using UnityEngine.UI;
 
 public class ControllerUI : MonoBehaviour 
 {
-	public Image m_UpArrow = null;
-	public Image m_RightArrow = null;
-	public Image m_DownArrow = null;
-	public Image m_LeftArrow = null;
+	public ControllerArrow m_UpArrow = null;
+	public ControllerArrow m_RightArrow = null;
+	public ControllerArrow m_DownArrow = null;
+	public ControllerArrow m_LeftArrow = null;
 
 	public Image m_ValidationFeedback = null;
-
-	public Color m_ActiveDirectionColor = Color.white;
-	public Color m_InactiveDirectionColor = Color.white;
 
 	public Color m_DefaultFeedbackColor = Color.white;
 	public Color m_PositiveFeedbackColor = Color.white;
 	public Color m_NegativeFeedbackColor = Color.white;
 	private Coroutine m_TemporaryColorChangeCoroutine = null;
 
-	private Image m_currentDirection = null;
+	private ControllerArrow m_currentDirection = null;
 	
 	void Awake()
 	{
@@ -30,7 +27,7 @@ public class ControllerUI : MonoBehaviour
 	void UpdateDirection(Direction newDirection)
 	{
 		if(m_currentDirection != null)
-			StartCoroutine(ChangeImageColor(m_currentDirection, m_InactiveDirectionColor));
+			m_currentDirection.Release();
 
 		switch(newDirection)
 		{
@@ -54,8 +51,9 @@ public class ControllerUI : MonoBehaviour
 				m_currentDirection = null;
 				break;
 		}
-		if(m_currentDirection != null)
-			StartCoroutine(ChangeImageColor(m_currentDirection,m_ActiveDirectionColor));
+		
+        if(m_currentDirection != null) 
+            m_currentDirection.Hold();
 	}
 
 	void FeedbackCheck(bool state)

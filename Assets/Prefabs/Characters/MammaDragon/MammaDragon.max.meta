@@ -67,6 +67,8 @@ ModelImporter:
     100118: WingMain
     100120: Omni001
     100122: SquareScale013
+    100124: Wing001
+    100126: WingMain001
     400000: Dragon_WingMembrane
     400002: DragonEye_L
     400004: DragonEye_R
@@ -129,6 +131,8 @@ ModelImporter:
     400118: WingMain
     400120: Omni001
     400122: SquareScale013
+    400124: Wing001
+    400126: WingMain001
     2300000: DragonEye_L
     2300002: DragonEye_R
     2300004: MammaDragon
@@ -182,6 +186,8 @@ ModelImporter:
     2300100: Wing
     2300102: WingMain
     2300104: SquareScale013
+    2300106: Wing001
+    2300108: WingMain001
     3300000: DragonEye_L
     3300002: DragonEye_R
     3300004: MammaDragon
@@ -235,6 +241,8 @@ ModelImporter:
     3300100: Wing
     3300102: WingMain
     3300104: SquareScale013
+    3300106: Wing001
+    3300108: WingMain001
     4300000: MammaDragon
     4300002: SkyScraper
     4300004: DragonEye_L
@@ -288,6 +296,8 @@ ModelImporter:
     4300100: SquareScale011
     4300102: SquareScale012
     4300104: SquareScale013
+    4300106: WingMain001
+    4300108: Wing001
     9500000: //RootNode
   materials:
     importMaterials: 1
