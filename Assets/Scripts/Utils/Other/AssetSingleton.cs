@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AssetSingleton<ScriptType> : ScriptableObject where ScriptType : ScriptableObject
 {
+
 	private static ScriptType m_instance = null;
 
     //------------------------------------------------------------------------ 
@@ -21,7 +22,7 @@ public class AssetSingleton<ScriptType> : ScriptableObject where ScriptType : Sc
 
                 if (m_instance == null)
                 {
-                    Debug.Log("Unable to find AssetSingleton of type " + typeof(ScriptType).Name + " file!");
+                    Debug.Log("Unable to find AssetSingleton of type" + typeof(ScriptType).Name + " file!");
                 }
 
                 return m_instance;
