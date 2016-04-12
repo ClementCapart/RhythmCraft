@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class RecipeControllerHUDSection : HUDSection 
 {
     List<ButtonRecipeUI> m_ButtonsUI = new List<ButtonRecipeUI>();
-    public GameObject m_CraftSetUIPrefab = null;
+    public GameObject m_CraftSetUIPrefab;
 
     List<CraftSetControllerUI> m_CurrentBuildDataSetsUI = new List<CraftSetControllerUI>(); 
 
