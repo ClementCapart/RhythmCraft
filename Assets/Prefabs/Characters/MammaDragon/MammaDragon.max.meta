@@ -90,6 +90,95 @@ ModelImporter:
     100164: WingMembraneR001
     100166: Dragon
     100168: WingMembraneL
+    100170: Bone001
+    100172: Bone002
+    100174: Bone003
+    100176: Bone004
+    100178: Bone005
+    100180: Bone006
+    100182: Bone007
+    100184: Bone008
+    100186: Bone009
+    100188: Bone010
+    100190: Bone011
+    100192: Bone012
+    100194: Bone013
+    100196: Bone014
+    100198: Bone015
+    100200: Bone016
+    100202: Bone017
+    100204: Bone018
+    100206: Bone019
+    100208: Bone020
+    100210: Bone021
+    100212: Bone022
+    100214: Bone023
+    100216: Bone024
+    100218: Bone025
+    100220: Bone026
+    100222: DragonFootR_BONE
+    100224: DragonHead_BONE
+    100226: DragonHead_BONE001
+    100228: DragonTail01_BONE
+    100230: DragonTail02_BONE
+    100232: DragonTail03_BONE
+    100234: DragonTail04_BONE
+    100236: DragonTail05_BONE
+    100238: DragonTail06_BONE
+    100240: DragonTail07_BONE
+    100242: Dragon_BONE
+    100244: Dragon_BONE 1
+    100246: Dragon_BONE 10
+    100248: Dragon_BONE 11
+    100250: Dragon_BONE 12
+    100252: Dragon_BONE 13
+    100254: Dragon_BONE 14
+    100256: Dragon_BONE 15
+    100258: Dragon_BONE 16
+    100260: Dragon_BONE 17
+    100262: Dragon_BONE 18
+    100264: Dragon_BONE 19
+    100266: Dragon_BONE 2
+    100268: Dragon_BONE 20
+    100270: Dragon_BONE 21
+    100272: Dragon_BONE 22
+    100274: Dragon_BONE 23
+    100276: Dragon_BONE 24
+    100278: Dragon_BONE 25
+    100280: Dragon_BONE 26
+    100282: Dragon_BONE 3
+    100284: Dragon_BONE 4
+    100286: Dragon_BONE 5
+    100288: Dragon_BONE 6
+    100290: Dragon_BONE 7
+    100292: Dragon_BONE 8
+    100294: Dragon_BONE 9
+    100296: DragonBody_BONE
+    100298: DragonFingerR01_BONE
+    100300: DragonFingerR01_BONE002(mirrored)
+    100302: DragonFingerR02_BONE
+    100304: DragonFingerR02_BONE002(mirrored)
+    100306: DragonFingerR03_BONE
+    100308: DragonFingerR03_BONE002(mirrored)
+    100310: DragonForearmR_BONE
+    100312: DragonForearmR_BONE002(mirrored)
+    100314: DragonHead01_BONE
+    100316: DragonJaw_BONE
+    100318: DragonTail_BONE01
+    100320: DragonTail_BONE02
+    100322: DragonTail_BONE03
+    100324: DragonTail_BONE04
+    100326: DragonTail_BONE05
+    100328: DragonTail_BONE06
+    100330: DragonTail_BONE07
+    100332: DragonTail_BONE08
+    100334: DragonThighR_BONE
+    100336: DragonTongue01_BONE
+    100338: DragonTongue02_BONE
+    100340: DragonTongue03_BONE
+    100342: DragonTongue04_BONE
+    100344: DragonUpperArmR_BONE
+    100346: DragonUpperArmR_BONE001(mirrored)
     400000: Dragon_WingMembrane
     400002: DragonEye_L
     400004: DragonEye_R
@@ -175,6 +264,95 @@ ModelImporter:
     400164: WingMembraneR001
     400166: Dragon
     400168: WingMembraneL
+    400170: Bone001
+    400172: Bone002
+    400174: Bone003
+    400176: Bone004
+    400178: Bone005
+    400180: Bone006
+    400182: Bone007
+    400184: Bone008
+    400186: Bone009
+    400188: Bone010
+    400190: Bone011
+    400192: Bone012
+    400194: Bone013
+    400196: Bone014
+    400198: Bone015
+    400200: Bone016
+    400202: Bone017
+    400204: Bone018
+    400206: Bone019
+    400208: Bone020
+    400210: Bone021
+    400212: Bone022
+    400214: Bone023
+    400216: Bone024
+    400218: Bone025
+    400220: Bone026
+    400222: DragonFootR_BONE
+    400224: DragonHead_BONE
+    400226: DragonHead_BONE001
+    400228: DragonTail01_BONE
+    400230: DragonTail02_BONE
+    400232: DragonTail03_BONE
+    400234: DragonTail04_BONE
+    400236: DragonTail05_BONE
+    400238: DragonTail06_BONE
+    400240: DragonTail07_BONE
+    400242: Dragon_BONE
+    400244: Dragon_BONE 1
+    400246: Dragon_BONE 10
+    400248: Dragon_BONE 11
+    400250: Dragon_BONE 12
+    400252: Dragon_BONE 13
+    400254: Dragon_BONE 14
+    400256: Dragon_BONE 15
+    400258: Dragon_BONE 16
+    400260: Dragon_BONE 17
+    400262: Dragon_BONE 18
+    400264: Dragon_BONE 19
+    400266: Dragon_BONE 2
+    400268: Dragon_BONE 20
+    400270: Dragon_BONE 21
+    400272: Dragon_BONE 22
+    400274: Dragon_BONE 23
+    400276: Dragon_BONE 24
+    400278: Dragon_BONE 25
+    400280: Dragon_BONE 26
+    400282: Dragon_BONE 3
+    400284: Dragon_BONE 4
+    400286: Dragon_BONE 5
+    400288: Dragon_BONE 6
+    400290: Dragon_BONE 7
+    400292: Dragon_BONE 8
+    400294: Dragon_BONE 9
+    400296: DragonBody_BONE
+    400298: DragonFingerR01_BONE
+    400300: DragonFingerR01_BONE002(mirrored)
+    400302: DragonFingerR02_BONE
+    400304: DragonFingerR02_BONE002(mirrored)
+    400306: DragonFingerR03_BONE
+    400308: DragonFingerR03_BONE002(mirrored)
+    400310: DragonForearmR_BONE
+    400312: DragonForearmR_BONE002(mirrored)
+    400314: DragonHead01_BONE
+    400316: DragonJaw_BONE
+    400318: DragonTail_BONE01
+    400320: DragonTail_BONE02
+    400322: DragonTail_BONE03
+    400324: DragonTail_BONE04
+    400326: DragonTail_BONE05
+    400328: DragonTail_BONE06
+    400330: DragonTail_BONE07
+    400332: DragonTail_BONE08
+    400334: DragonThighR_BONE
+    400336: DragonTongue01_BONE
+    400338: DragonTongue02_BONE
+    400340: DragonTongue03_BONE
+    400342: DragonTongue04_BONE
+    400344: DragonUpperArmR_BONE
+    400346: DragonUpperArmR_BONE001(mirrored)
     2300000: DragonEye_L
     2300002: DragonEye_R
     2300004: MammaDragon
