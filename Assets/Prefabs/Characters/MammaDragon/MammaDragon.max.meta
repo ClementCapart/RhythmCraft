@@ -69,6 +69,27 @@ ModelImporter:
     100122: SquareScale013
     100124: Wing001
     100126: WingMain001
+    100128: Box010
+    100130: Box011
+    100132: Box013
+    100134: Box014
+    100136: Box015
+    100138: SquareScale014
+    100140: DragonArmR
+    100142: DragonThighR
+    100144: Object001
+    100146: Object002
+    100148: Object003
+    100150: Object004
+    100152: WingMainR
+    100154: WingMembraneR
+    100156: DragonEyelidR001
+    100158: DragonEyeR001
+    100160: Joanna
+    100162: JoannaHornsClaws
+    100164: WingMembraneR001
+    100166: Dragon
+    100168: WingMembraneL
     400000: Dragon_WingMembrane
     400002: DragonEye_L
     400004: DragonEye_R
@@ -133,6 +154,27 @@ ModelImporter:
     400122: SquareScale013
     400124: Wing001
     400126: WingMain001
+    400128: Box010
+    400130: Box011
+    400132: Box013
+    400134: Box014
+    400136: Box015
+    400138: SquareScale014
+    400140: DragonArmR
+    400142: DragonThighR
+    400144: Object001
+    400146: Object002
+    400148: Object003
+    400150: Object004
+    400152: WingMainR
+    400154: WingMembraneR
+    400156: DragonEyelidR001
+    400158: DragonEyeR001
+    400160: Joanna
+    400162: JoannaHornsClaws
+    400164: WingMembraneR001
+    400166: Dragon
+    400168: WingMembraneL
     2300000: DragonEye_L
     2300002: DragonEye_R
     2300004: MammaDragon
@@ -188,6 +230,27 @@ ModelImporter:
     2300104: SquareScale013
     2300106: Wing001
     2300108: WingMain001
+    2300110: Box010
+    2300112: Box011
+    2300114: Box013
+    2300116: Box014
+    2300118: Box015
+    2300120: SquareScale014
+    2300122: DragonArmR
+    2300124: DragonThighR
+    2300126: Object001
+    2300128: Object002
+    2300130: Object003
+    2300132: Object004
+    2300134: WingMainR
+    2300136: WingMembraneR
+    2300138: DragonEyelidR001
+    2300140: DragonEyeR001
+    2300142: Joanna
+    2300144: JoannaHornsClaws
+    2300146: WingMembraneR001
+    2300148: Dragon
+    2300150: WingMembraneL
     3300000: DragonEye_L
     3300002: DragonEye_R
     3300004: MammaDragon
@@ -243,6 +306,27 @@ ModelImporter:
     3300104: SquareScale013
     3300106: Wing001
     3300108: WingMain001
+    3300110: Box010
+    3300112: Box011
+    3300114: Box013
+    3300116: Box014
+    3300118: Box015
+    3300120: SquareScale014
+    3300122: DragonArmR
+    3300124: DragonThighR
+    3300126: Object001
+    3300128: Object002
+    3300130: Object003
+    3300132: Object004
+    3300134: WingMainR
+    3300136: WingMembraneR
+    3300138: DragonEyelidR001
+    3300140: DragonEyeR001
+    3300142: Joanna
+    3300144: JoannaHornsClaws
+    3300146: WingMembraneR001
+    3300148: Dragon
+    3300150: WingMembraneL
     4300000: MammaDragon
     4300002: SkyScraper
     4300004: DragonEye_L
@@ -298,6 +382,27 @@ ModelImporter:
     4300104: SquareScale013
     4300106: WingMain001
     4300108: Wing001
+    4300110: SquareScale014
+    4300112: Box010
+    4300114: Box011
+    4300116: Box013
+    4300118: Box014
+    4300120: Box015
+    4300122: DragonThighR
+    4300124: DragonArmR
+    4300126: WingMainR
+    4300128: WingMembraneR
+    4300130: Object001
+    4300132: Object002
+    4300134: Object003
+    4300136: Object004
+    4300138: Joanna
+    4300140: JoannaHornsClaws
+    4300142: DragonEyeR001
+    4300144: WingMembraneR001
+    4300146: DragonEyelidR001
+    4300148: Dragon
+    4300150: WingMembraneL
     9500000: //RootNode
   materials:
     importMaterials: 1
