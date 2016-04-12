@@ -61,7 +61,7 @@ public class AssetCustomImporter : AssetPostprocessor
         Vector3[] vertices= mesh.vertices;
         for(index = 0; index < vertices.Length; index++)
         {
-            vertices[index] = Quaternion.AngleAxis(90.0f, Vector3.right) * vertices[index];
+            vertices[index] = Quaternion.AngleAxis(-90.0f, Vector3.right) * vertices[index];
         }
 
         mesh.vertices = vertices;        

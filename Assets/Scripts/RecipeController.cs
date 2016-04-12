@@ -7,16 +7,36 @@ public class RecipeController : MonoBehaviour
     List<ItemData> m_AvailableCrafts = new List<ItemData>();
     
     public CraftPatternPlayer m_CraftPatternPlayer = null;
-    public List<Buttons> m_ButtonPerIndex = new List<Buttons>();
 
-    Dictionary<Buttons, ItemData> m_UsableRecipes = new Dictionary<Buttons,ItemData>();
-    public delegate void UsableRecipesUpdated(Dictionary<Buttons, ItemData> usableRecipes);
-    public static UsableRecipesUpdated s_usableRecipesUpdated;
+    public BuildingData m_CurrentBuilding = null;
+    public BuildingData.CraftSet m_CurrentCraftSet = null;
+    private int m_craftSetIndex = -1;
+
+    public delegate void OnBuildingSelected(BuildingData building);
+    public delegate void OnCraftSetSelected(BuildingData.CraftSet craftSet);
+    
+    public static OnBuildingSelected s_OnBuildingSelected = null;
+    public static OnCraftSetSelected s_OnCraftSetSelected = null;
 
     void Start()
     {
         Inventory.s_onUpdateInventory += UpdateAvailableCrafts;
+        OnBuildingChanged(ItemDatabase.GetBuildingByUniqueID(""));        
         UpdateAvailableCrafts(null);
+    }
+   
+    void OnBuildingChanged(BuildingData newBuilding)
+    {
+        m_CurrentBuilding = newBuilding;        
+
+        if(m_CurrentBuilding != null)
+        {
+            if(s_OnBuildingSelected != null) s_OnBuildingSelected(m_CurrentBuilding);
+
+            m_CurrentCraftSet = m_CurrentBuilding.GetCraftSet();
+            m_craftSetIndex = 0;
+            if(m_CurrentCraftSet != null && s_OnCraftSetSelected != null) s_OnCraftSetSelected(m_CurrentCraftSet);
+        }
     }
 
     void OnDestroy()
@@ -28,15 +48,26 @@ public class RecipeController : MonoBehaviour
     {        
         if (m_CraftPatternPlayer && m_CraftPatternPlayer.m_State == CraftPatternPlayer.PlayerState.Stopped && !HUDSectionSelection.HasSelection())
         {
-            foreach (KeyValuePair<Buttons, ItemData> kvp in m_UsableRecipes)
+            if(XInput.GetButtonUp(Buttons.RightBumper, 0))
+            {
+                SelectNextCraftSet();
+            }
+            /*foreach (KeyValuePair<Buttons, ItemData> kvp in m_UsableRecipes)
             {
                 if (XInput.GetButtonDown(kvp.Key, 0))
                 {
                     m_CraftPatternPlayer.StartPattern(kvp.Value);
                     break;
                 }
-            }
+            }*/
         }
+    }
+
+    void SelectNextCraftSet()
+    {
+        m_craftSetIndex = (m_craftSetIndex + 1) % m_CurrentBuilding.m_CraftSets.Count;
+        m_CurrentCraftSet = m_CurrentBuilding.GetCraftSet(m_craftSetIndex);
+        if(m_CurrentCraftSet != null && s_OnCraftSetSelected != null) s_OnCraftSetSelected(m_CurrentCraftSet);
     }
 
     void UpdateAvailableCrafts(List<Inventory.InventoryItem> inventoryData)
@@ -99,29 +130,7 @@ public class RecipeController : MonoBehaviour
     }
 
     void UpdateRecipeInput()
-    {    
-        m_UsableRecipes.Clear();
-
-        for (int i = 0; i < m_ButtonPerIndex.Count; i++)
-        {
-            if(i < m_AvailableCrafts.Count)
-            {
-                m_UsableRecipes.Add(GetInputPerIndex(i), m_AvailableCrafts[i]);
-            }
-            else
-            {
-                m_UsableRecipes.Add(GetInputPerIndex(i), null);
-            }
-        }
-
-        if(s_usableRecipesUpdated != null) s_usableRecipesUpdated(m_UsableRecipes);
-    }
-
-    Buttons GetInputPerIndex(int index)
-    {
-        if(index < m_ButtonPerIndex.Count)
-            return m_ButtonPerIndex[index];
-
-        return Buttons.None;
-    }
+    {            
+        //if(s_usableRecipesUpdated != null) s_usableRecipesUpdated(m_UsableRecipes);
+    }    
 }

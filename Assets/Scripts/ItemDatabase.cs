@@ -2,6 +2,88 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+
+[System.Serializable]
+public class BuildingData
+{
+    public class CraftSet
+    {
+        private Dictionary<Buttons, ItemData> m_AssignedRecipes = null;
+
+        public CraftSet()
+        {
+            m_AssignedRecipes = new Dictionary<Buttons,ItemData>();
+        }
+
+        public int GetCount()
+        {
+            return m_AssignedRecipes.Count;
+        }
+
+        public void AddAssignedRecipe(Buttons button, ItemData item)
+        {
+            m_AssignedRecipes.Add(button, item);
+        }
+    }
+
+    public ItemData m_Building = null;
+    public List<ItemData> m_Recipes = null;
+    public List<CraftSet> m_CraftSets = null;
+
+    public BuildingData(ItemData building)
+    {
+        m_Building = building;
+    }
+
+    public void AddRecipe(ItemData itemData)
+    {
+        if(m_Recipes == null)
+        {
+            m_Recipes = new List<ItemData>();
+        }
+
+        m_Recipes.Add(itemData);
+    }
+
+    public CraftSet GetCraftSet(int index = 0)
+    {
+        if(m_CraftSets != null && m_CraftSets.Count > index)
+        {
+            return m_CraftSets[index];
+        }
+        
+        return null;
+    }
+
+    public void AssignButtons(List<Buttons> buttonPerIndex)
+    {
+        if(m_Recipes.Count == 0)
+            return;
+
+        m_CraftSets = new List<CraftSet>();
+
+        int currentButtonIndex = 0;
+        CraftSet currentCraftSet = new CraftSet();
+        m_CraftSets.Add(currentCraftSet);        
+
+        foreach (ItemData item in m_Recipes)
+        {
+            if(currentButtonIndex >= buttonPerIndex.Count)
+            {
+                currentButtonIndex = 0;
+                currentCraftSet = new CraftSet();
+                m_CraftSets.Add(currentCraftSet);
+            }
+
+            if(item.m_Enabled)
+            {
+                currentCraftSet.AddAssignedRecipe(buttonPerIndex[currentButtonIndex], item);
+                currentButtonIndex++;             
+            }
+        }
+    }
+}
 
 [System.Serializable]
 public class CraftPattern
@@ -131,7 +213,9 @@ public class ItemData
     //public AnimationClip m_CraftPattern = null;
     public CraftPattern m_CraftPattern = null;
 
+    public string m_InBuildingID = null;
     public RecipeData m_Recipe = new RecipeData();
+
 
     [System.NonSerialized]
     public bool m_AlreadyCrafted = true;
@@ -156,6 +240,7 @@ public enum ItemType
     Ingredient = 0x1,
     Usable = 0x2,
     Entertainment = 0x4,
+    Building = 0x8,
 }
 
 public class ItemDatabase : AssetSingleton<ItemDatabase>
@@ -165,13 +250,14 @@ public class ItemDatabase : AssetSingleton<ItemDatabase>
 
 	private	Dictionary<string, ItemData>	m_itemDatabase	= new Dictionary<string, ItemData>();
 
+    private Dictionary<string, BuildingData> m_allBuildings = new Dictionary<string,BuildingData>();
+
+    public List<Buttons> m_ButtonsPerIndex = new List<Buttons>();
+
 	private	void OnEnable()
 	{
-		foreach (ItemData item in m_items)
-		{
-            m_itemDatabase.Add(item.m_UniqueID, item);
-            item.m_CraftPattern.Unserialize(item.m_CraftPattern.m_Serialized);
-		}
+		Refresh();
+        InitializeBuildingData();
 	}
 
     public void Refresh()
@@ -182,6 +268,52 @@ public class ItemDatabase : AssetSingleton<ItemDatabase>
             m_itemDatabase.Add(item.m_UniqueID, item);
             item.m_CraftPattern.Unserialize(item.m_CraftPattern.m_Serialized);
         }
+    }
+
+    void InitializeBuildingData()
+    {
+        m_allBuildings = new Dictionary<string, BuildingData>();
+        
+        List<ItemData> allItems = ItemDatabase.GetAllItems();
+
+        ItemData data = null;
+        BuildingData buildingData = null;
+
+        for(int i = 0; i < allItems.Count; i++)
+        {            
+            data = allItems[i];
+
+            if(!m_allBuildings.TryGetValue(allItems[i].m_InBuildingID, out buildingData))
+            {
+                buildingData = new BuildingData(ItemDatabase.GetItemByUniqueID(allItems[i].m_InBuildingID));
+                m_allBuildings.Add(allItems[i].m_InBuildingID, buildingData);
+            }
+            
+            buildingData.AddRecipe(data);            
+            
+            data = null;
+            buildingData = null;
+        }
+
+        foreach(KeyValuePair<string, BuildingData> buildings in m_allBuildings)
+        {
+            buildings.Value.AssignButtons(m_ButtonsPerIndex);
+        }
+    }
+
+    public static BuildingData GetBuildingByUniqueID(string uniqueID)
+    {
+        ItemDatabase inst = Instance;
+
+        if(inst != null)
+        {
+            if(Instance.m_allBuildings.ContainsKey(uniqueID))
+            {
+                return Instance.m_allBuildings[uniqueID];
+            }
+        }
+
+        return null;
     }
 
     public static ItemData GetItemByUniqueID(string uniqueID)

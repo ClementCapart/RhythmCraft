@@ -66,6 +66,18 @@ public class ItemDatabaseEditor : Editor
                         item.m_CraftPattern.Unserialize(EditorGUILayout.TextField("Craft Pattern", item.m_CraftPattern.m_Serialized));
                     }
                     
+                    List<ItemData> items = ItemDatabase.GetAllItems();    
+            
+                    string[] itemNames = new string[items.Count + 1];
+                    itemNames[0] = "None";
+                    for(int i = 0; i < items.Count; i++)
+                    {
+                        itemNames[i + 1] = items[i].m_Name;
+                    }
+
+                    ItemData building = ItemDatabase.GetItemByIndex(EditorGUILayout.Popup("Building", item.m_InBuildingID != "" ? ItemDatabase.GetIndexByUniqueID(item.m_InBuildingID) + 1 : 0, itemNames) - 1);
+                    item.m_InBuildingID = building != null ? building.m_UniqueID : "";
+
                     
                     SerializedProperty recipeProp = m_itemListProperty.GetArrayElementAtIndex(m_currentlySelected).FindPropertyRelative("m_Recipe");
                     EditorGUILayout.PropertyField(recipeProp, true);
@@ -82,6 +94,10 @@ public class ItemDatabaseEditor : Editor
         }
 
         this.m_itemList.DoLayoutList();
+
+        SerializedProperty buttons = this.serializedObject.FindProperty("m_ButtonsPerIndex");
+        EditorGUILayout.PropertyField(buttons, true);
+
         this.serializedObject.ApplyModifiedProperties();
     }
 
