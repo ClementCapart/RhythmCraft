@@ -18,13 +18,13 @@ public class AssetCustomImporter : AssetPostprocessor
 
     void OnPostprocessModel(GameObject result)
     {
-        ModelImporter modelImporter = assetImporter as ModelImporter;
+        /*ModelImporter modelImporter = assetImporter as ModelImporter;
         if(Path.GetExtension(modelImporter.assetPath) == ".max")
         {
             RotateObject(result.transform);
         }
 
-        //result.transform.rotation = Quaternion.identity;
+        result.transform.rotation = Quaternion.identity;*/
     }
 
     private void RotateObject(Transform transform, bool meshOnly = false)
@@ -49,6 +49,7 @@ public class AssetCustomImporter : AssetPostprocessor
 
         foreach(Transform child in transform)
         {
+            child.transform.position = Quaternion.AngleAxis(90.0f, transform.right) * transform.position;
             RotateObject(child, true);
         }
     }
@@ -60,7 +61,7 @@ public class AssetCustomImporter : AssetPostprocessor
         Vector3[] vertices= mesh.vertices;
         for(index = 0; index < vertices.Length; index++)
         {
-            vertices[index] = Quaternion.AngleAxis(-90.0f, Vector3.right) * vertices[index];
+            vertices[index] = Quaternion.AngleAxis(90.0f, Vector3.right) * vertices[index];
         }
 
         mesh.vertices = vertices;        
