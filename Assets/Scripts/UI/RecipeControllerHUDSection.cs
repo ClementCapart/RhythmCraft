@@ -54,7 +54,7 @@ public class RecipeControllerHUDSection : HUDSection
                 CraftSetControllerUI uiScript = obj.GetComponent<CraftSetControllerUI>();
                 obj.transform.SetParent(transform, false);
                 uiScript.m_RectTransform.anchoredPosition = new Vector2(i * m_CraftSetUIOffset.x, i * m_CraftSetUIOffset.y);
-                uiScript.m_CraftSet = craftSets[i];
+                uiScript.InitializeIcons(craftSets[i]);
                 m_CurrentBuildDataSetsUI.Add(uiScript);
             }
         }

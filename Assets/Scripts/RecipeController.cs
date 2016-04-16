@@ -20,9 +20,7 @@ public class RecipeController : MonoBehaviour
 
     void Start()
     {
-        Inventory.s_onUpdateInventory += UpdateAvailableCrafts;
-        OnBuildingChanged(ItemDatabase.GetBuildingByUniqueID(""));        
-        UpdateAvailableCrafts(null);
+        OnBuildingChanged(ItemDatabase.GetBuildingByUniqueID(""));
     }
    
     void OnBuildingChanged(BuildingData newBuilding)
@@ -41,7 +39,6 @@ public class RecipeController : MonoBehaviour
 
     void OnDestroy()
     {
-        Inventory.s_onUpdateInventory -= UpdateAvailableCrafts;
     }
 
     void Update()
@@ -52,14 +49,18 @@ public class RecipeController : MonoBehaviour
             {
                 SelectNextCraftSet();
             }
-            /*foreach (KeyValuePair<Buttons, ItemData> kvp in m_UsableRecipes)
+
+            if(m_CurrentCraftSet != null)
             {
-                if (XInput.GetButtonDown(kvp.Key, 0))
+                foreach(KeyValuePair<Buttons, ItemData> kvp in m_CurrentCraftSet.GetRecipes())
                 {
-                    m_CraftPatternPlayer.StartPattern(kvp.Value);
-                    break;
+                    if(XInput.GetButtonDown(kvp.Key, 0))
+                    {
+                        m_CraftPatternPlayer.StartPattern(kvp.Value);
+                        break;
+                    }
                 }
-            }*/
+            }            
         }
     }
 
@@ -68,69 +69,5 @@ public class RecipeController : MonoBehaviour
         m_craftSetIndex = (m_craftSetIndex + 1) % m_CurrentBuilding.m_CraftSets.Count;
         m_CurrentCraftSet = m_CurrentBuilding.GetCraftSet(m_craftSetIndex);
         if(m_CurrentCraftSet != null && s_OnCraftSetSelected != null) s_OnCraftSetSelected(m_CurrentCraftSet);
-    }
-
-    void UpdateAvailableCrafts(List<Inventory.InventoryItem> inventoryData)
-    {
-        m_AvailableCrafts.Clear();
-
-        List<ItemData> itemData = ItemDatabase.GetAllItems();
-
-        for(int i = 0; i < itemData.Count; i++)
-        {
-            if(!itemData[i].m_Enabled)
-                continue;
-
-            if(itemData[i].m_Recipe.m_ItemsNeeded != null && itemData[i].m_Recipe.m_ItemsNeeded.Count > 0)
-            {
-                if(inventoryData == null || inventoryData.Count == 0)
-                    continue;
-
-                bool missingIngredients = false;
-
-                foreach(RecipeElement element in itemData[i].m_Recipe.m_ItemsNeeded)
-                {
-                    int countNeeded = element.m_itemCount;
-
-                    for(int j = 0; j < inventoryData.Count; j++)
-                    {
-                        if(inventoryData[j].m_ItemData.m_UniqueID == element.m_itemID)
-                        {
-                            if(countNeeded < inventoryData[j].m_Count)
-                            {
-                                countNeeded = 0;
-                                break;
-                            }
-                            else
-                            {
-                                countNeeded -= inventoryData[j].m_Count;
-                            }
-                        }
-                    }
-
-                    if(countNeeded > 0)
-                    {
-                        missingIngredients = true;
-                        break;
-                    }
-                }
-
-                if(!missingIngredients)
-                {
-                    m_AvailableCrafts.Add(itemData[i]);
-                }
-            }
-            else
-            {
-                m_AvailableCrafts.Add(itemData[i]);
-            }
-        }
-
-        UpdateRecipeInput();
-    }
-
-    void UpdateRecipeInput()
-    {            
-        //if(s_usableRecipesUpdated != null) s_usableRecipesUpdated(m_UsableRecipes);
-    }    
+    }        
 }

@@ -25,6 +25,11 @@ public class BuildingData
         {
             m_AssignedRecipes.Add(button, item);
         }
+
+        public Dictionary<Buttons, ItemData> GetRecipes()
+        {
+            return m_AssignedRecipes;
+        }
     }
 
     public ItemData m_Building = null;
@@ -168,6 +173,12 @@ public class CraftPattern
             return;
 
         string[] notes = m_Serialized.Split(' ');
+        if(notes.Length == 1 && notes[0] == "")
+        {
+            m_Pattern = new PatternNote[0];
+            return;
+        }
+
         m_Pattern = new PatternNote[notes.Length];
         if(notes != null)
         {
@@ -283,13 +294,17 @@ public class ItemDatabase : AssetSingleton<ItemDatabase>
         {            
             data = allItems[i];
 
-            if(!m_allBuildings.TryGetValue(allItems[i].m_InBuildingID, out buildingData))
+            if(data.m_Enabled)
             {
-                buildingData = new BuildingData(ItemDatabase.GetItemByUniqueID(allItems[i].m_InBuildingID));
-                m_allBuildings.Add(allItems[i].m_InBuildingID, buildingData);
+                if(!m_allBuildings.TryGetValue(allItems[i].m_InBuildingID, out buildingData))
+                {
+                    buildingData = new BuildingData(ItemDatabase.GetItemByUniqueID(allItems[i].m_InBuildingID));
+                    m_allBuildings.Add(allItems[i].m_InBuildingID, buildingData);
+                }
+            
+                buildingData.AddRecipe(data);            
             }
             
-            buildingData.AddRecipe(data);            
             
             data = null;
             buildingData = null;

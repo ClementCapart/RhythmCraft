@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CraftSetControllerUI : MonoBehaviour 
 {
@@ -10,9 +11,25 @@ public class CraftSetControllerUI : MonoBehaviour
     public GameObject m_HiddenInPartial = null;
     public Image m_BackgroundImage = null;
 
+    public ButtonRecipeUI[] m_Buttons = null;
+
     public float m_ImageAlphaInPartial = 0.3f;
 
     private Coroutine m_movingCoroutine = null;
+
+    public void InitializeIcons(BuildingData.CraftSet craftSet)
+    {
+        m_CraftSet = craftSet;
+        ItemData data = null;
+        Dictionary<Buttons, ItemData> recipes = craftSet.GetRecipes();
+
+        for(int i = 0; i < m_Buttons.Length; i++)
+        {                
+            recipes.TryGetValue(m_Buttons[i].m_Button, out data);
+            m_Buttons[i].UpdateRecipe(data);
+            data = null;
+        }        
+    }
 
     public void FullDisplay()
     {
