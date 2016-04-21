@@ -92,7 +92,7 @@ public class CraftToken
 
 	private void CheckValidation()
 	{
-		if(Controller.Instance.ControlDirection == m_direction)
+		if(RhythmController.Instance.ControlDirection == m_direction)
 		{
 			Validate(true);
 		}

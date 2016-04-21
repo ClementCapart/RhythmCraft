@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 public class InventoryHUDSection : HUDSection 
 {
+    public GameObject m_InventoryItemPrefab = null;
+
     public GameObject m_InventoryItemsContainer = null;
 
     List<InventoryItemUI> m_inventoryData = new List<InventoryItemUI>();
@@ -42,37 +45,69 @@ public class InventoryHUDSection : HUDSection
 
 	void Awake ()
 	{
-	    Inventory.s_onUpdateInventory += UpdateUI;
-        if (m_InventoryItemsContainer != null)
-        {
-            m_inventoryData = new List<InventoryItemUI>(m_InventoryItemsContainer.GetComponentsInChildren<InventoryItemUI>(true));
-        }
-
-        for(int i = 0; i < m_inventoryData.Count; i++)
-        {
-            m_inventoryData[i].m_InventoryHUDSection = this;
-        }
+	    Inventory.s_onItemUpdated += UpdateUIItem;
+        Inventory.s_onItemAdded += AddUIItem;
+        Inventory.s_onItemRemoved += RemoveUIItem;
 	}
 
 	void OnDestroy()
     {
-        Inventory.s_onUpdateInventory += UpdateUI;
+        Inventory.s_onItemUpdated -= UpdateUIItem;
+        Inventory.s_onItemAdded -= AddUIItem;
+        Inventory.s_onItemRemoved -= RemoveUIItem;
     }
 
-    void UpdateUI(List<Inventory.InventoryItem> inventoryState)
+    public override void TrySelectLatest()
+    {
+        if (m_latestSelected && m_latestSelected.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(m_latestSelected);
+        }
+        else
+        {
+            if(m_inventoryData.Count > 0)
+            {
+                EventSystem.current.SetSelectedGameObject(m_inventoryData[0].gameObject);
+            }
+        }
+    }
+
+    void UpdateUIItem(InventoryItem item)
     {
         for(int i = 0; i < m_inventoryData.Count; i ++)
         {
-            if(inventoryState != null && inventoryState.Count > i)
+            if(m_inventoryData[i].m_item == item)
             {
-                m_inventoryData[i].UpdateItem(inventoryState[i]);
+                m_inventoryData[i].UpdateCount();
+                return;
             }
-            else
+        }        
+    }
+
+    void AddUIItem(InventoryItem item)
+    {
+        GameObject obj = Instantiate(m_InventoryItemPrefab) as GameObject;
+        obj.transform.SetParent(m_InventoryItemsContainer.transform, false);
+
+        InventoryItemUI inventoryItem = obj.GetComponent<InventoryItemUI>();
+        if (inventoryItem)
+        {
+            inventoryItem.m_InventoryHUDSection = this;
+            inventoryItem.ReplaceItem(item);
+            m_inventoryData.Add(inventoryItem);
+        }
+    }
+
+    void RemoveUIItem(InventoryItem item)
+    {
+        for(int i = m_inventoryData.Count - 1; i >= 0; i--)
+        {
+            if(m_inventoryData[i].m_item == item)
             {
-                m_inventoryData[i].UpdateItem(null);
+                m_inventoryData[i].ClearItem();
+                m_inventoryData.RemoveAt(i);
+                return;
             }
         }
-
-        //TrySelectLatest();
     }
 }

@@ -2,53 +2,55 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Inventory : MonoBehaviour 
+public class InventoryItem
 {
-    public class InventoryItem
+    public ItemData m_ItemData;
+    public int m_Count = -1;
+    private Inventory m_currentInventory;
+
+    public InventoryItem(ItemData data, int count, Inventory currentInventory)
     {
-        public ItemData m_ItemData;
-        public int m_Count = -1;
-        private Inventory m_currentInventory;
-
-        public InventoryItem(ItemData data, int count, Inventory currentInventory)
-        {
-            m_ItemData = data;
-            m_Count = count;
-            m_currentInventory = currentInventory;
-        }
-
-        public void Delete(int count)
-        {
-            m_currentInventory.RemoveItem(this, count);
-        }
-
-        public void Use()
-        {
-            if ((m_ItemData.m_TypeFlags & ItemType.Entertainment) == ItemType.Entertainment)
-            {
-                StimEntertainment.EmitStim(new StimEntertainment(10.0f));
-                Delete(1);
-            }
-            else
-            {
-                Debug.Log("Does nothing!");
-            }            
-        }
+        m_ItemData = data;
+        m_Count = count;
+        m_currentInventory = currentInventory;
     }
 
-    public delegate void OnUpdateInventoryDelegate(List<InventoryItem> inventory);
-    public static OnUpdateInventoryDelegate s_onUpdateInventory;
+    public void Delete(int count)
+    {
+        m_currentInventory.RemoveItem(this, count);
+    }
+
+    public void Use()
+    {
+        if ((m_ItemData.m_TypeFlags & ItemType.Entertainment) == ItemType.Entertainment)
+        {
+            StimEntertainment.EmitStim(new StimEntertainment(10.0f));
+            Delete(1);
+        }
+        else
+        {
+            Debug.Log("Does nothing!");
+        }            
+    }
+}
+
+public class Inventory : MonoBehaviour 
+{
+    
+
+    public delegate void OnItemUpdated(InventoryItem item);
+    public static OnItemUpdated s_onItemUpdated;
+    public delegate void OnItemAdded(InventoryItem item);
+    public static OnItemAdded s_onItemAdded;
+    public delegate void OnItemRemoved(InventoryItem item);
+    public static OnItemRemoved s_onItemRemoved;
+
     public List<InventoryItem> m_InventoryItems = new List<InventoryItem>();
     
     void Start()
     {
         CraftPatternPlayer.s_craftSequenceStarted += OnCraftStart;
-        CraftPatternPlayer.s_craftSequenceEnded += OnCraftEnd;
-        
-        //Test
-        AddItem(ItemDatabase.GetItemByIndex(0), 3);
-        AddItem(ItemDatabase.GetItemByIndex(1), 1);
-        AddItem(ItemDatabase.GetItemByIndex(2), 2);
+        CraftPatternPlayer.s_craftSequenceEnded += OnCraftEnd;     
     }
 
     void OnDestroy()
@@ -91,6 +93,8 @@ public class Inventory : MonoBehaviour
 
     void AddItem(ItemData item, int count)
     {
+        InventoryItem newItem = null;
+
         if(item.m_IsStackable)
         {
             for(int i = 0; i < m_InventoryItems.Count; i++)
@@ -98,33 +102,35 @@ public class Inventory : MonoBehaviour
                 if(m_InventoryItems[i].m_ItemData == item)
                 {
                     m_InventoryItems[i].m_Count += count;
-                    if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
+                    if(s_onItemUpdated != null) s_onItemUpdated(m_InventoryItems[i]);
                     return;
                 }
             }
 
-            m_InventoryItems.Add(new InventoryItem(item, count, this));
+            newItem = new InventoryItem(item, count, this);
+            m_InventoryItems.Add(newItem);
         }
         else
         {
-            m_InventoryItems.Add(new InventoryItem(item, count, this));
+            newItem = new InventoryItem(item, count, this);
+            m_InventoryItems.Add(newItem);
         }
 
-        if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
+        if(newItem != null && s_onItemAdded != null) s_onItemAdded(newItem);
     }
 
-    void RemoveItem(InventoryItem item, int count)
+    public void RemoveItem(InventoryItem item, int count)
     {
         if(item.m_Count <= count)
         {
             m_InventoryItems.Remove(item);
+            if(s_onItemRemoved != null) s_onItemRemoved(item);
         }
         else
         {
             item.m_Count -= count;
+            if(s_onItemUpdated != null) s_onItemUpdated(item);
         }        
-
-        if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
     }
 
     void RemoveItem(ItemData item, int count)
@@ -133,26 +139,8 @@ public class Inventory : MonoBehaviour
         {
             if(m_InventoryItems[i].m_ItemData == item)
             {
-                if(m_InventoryItems[i].m_Count > count)
-                {
-                    m_InventoryItems[i].m_Count -= count;
-                    if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
-                    return;
-                }
-                else
-                {
-                    count -= m_InventoryItems[i].m_Count;
-                    m_InventoryItems.RemoveAt(i);
-                }
-
-                if (count <= 0)
-                {
-                    if (s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
-                    return;
-                }
+                RemoveItem(m_InventoryItems[i], count);
             }
         }
-
-        if(s_onUpdateInventory != null) s_onUpdateInventory(m_InventoryItems);
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Controller : MonoBehaviour
+public class RhythmController : MonoBehaviour
 {
-	private static Controller m_instance = null;
-	public static Controller Instance
+	private static RhythmController m_instance = null;
+	public static RhythmController Instance
 	{
 		get { return m_instance; }
 	}

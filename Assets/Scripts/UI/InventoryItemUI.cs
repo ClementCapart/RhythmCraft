@@ -5,7 +5,7 @@ using System.Collections;
 public class InventoryItemUI : MonoBehaviour 
 {    
     public InventoryHUDSection m_InventoryHUDSection = null;
-    public Inventory.InventoryItem m_item = null;
+    public InventoryItem m_item = null;
     public bool IsEmpty
     {
         get { return m_item == null; }
@@ -20,7 +20,7 @@ public class InventoryItemUI : MonoBehaviour
 
 	void Start () 
     {	    
-        UpdateItem(null);
+        //ClearItem();
 	}		
 
     public void OnConfirm()
@@ -28,22 +28,19 @@ public class InventoryItemUI : MonoBehaviour
         ContextualPopupManager.CreateInventoryItemPopup(this);
     }
 
-    public void UpdateItem(Inventory.InventoryItem item)
+    public void ReplaceItem(InventoryItem item)
     {
-        m_item = item;
-
-        if(item == null)
+        if(!IsEmpty)
         {
-            gameObject.SetActive(false);
-            return;
+            ClearItem();
         }
 
-        gameObject.SetActive(true);
+        m_item = item;
 
         if (m_Icon != null)
         {
-            if(item.m_ItemData.m_ItemIcon != null)
-                m_Icon.sprite = item.m_ItemData.m_ItemIcon;
+            if(m_item.m_ItemData.m_ItemIcon != null)
+                m_Icon.sprite = m_item.m_ItemData.m_ItemIcon;
             else
                 m_Icon.sprite = m_MissingIconSprite;
         }
@@ -53,13 +50,30 @@ public class InventoryItemUI : MonoBehaviour
             if(item.m_ItemData.m_IsStackable)
             {
                 m_NumberText.gameObject.SetActive(true);
-                m_NumberText.text = item.m_Count.ToString();
+                m_NumberText.text = m_item.m_Count.ToString();
             }
             else
             {
                 m_NumberText.gameObject.SetActive(false);
             }            
         }
+
+        gameObject.SetActive(true);
+    }
+
+    public void UpdateCount()
+    {
+        if (m_NumberText != null)
+        {
+            m_NumberText.text = m_item.m_Count.ToString();
+        }
+    }
+
+    public void ClearItem()
+    {
+        gameObject.SetActive(false);
+        m_item = null;
+        Destroy(gameObject);
     }
 
     public void Select()

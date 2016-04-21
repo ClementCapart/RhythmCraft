@@ -20,7 +20,7 @@ public class ControllerUI : MonoBehaviour
 	
 	void Awake()
 	{
-		Controller.OnChangeDirection += UpdateDirection;
+		RhythmController.OnChangeDirection += UpdateDirection;
 		CraftToken.OnTokenCheck += FeedbackCheck;
 	}
 

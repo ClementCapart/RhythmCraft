@@ -23,6 +23,7 @@ public class HUDSection : MonoBehaviour
     public float m_ScaleDuration = 0.5f;
 
     private RectTransform m_RectTransform = null;
+    public GameObject m_DefaultSelection = null;
     protected GameObject m_latestSelected = null;
 
     public delegate void OnChangeStateDelegate(HUDSectionState state);
@@ -134,7 +135,7 @@ public class HUDSection : MonoBehaviour
         }
     }
 
-    public void TrySelectLatest()
+    public virtual void TrySelectLatest()
     {
         if (m_latestSelected && m_latestSelected.activeInHierarchy)
         {
