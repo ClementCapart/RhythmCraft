@@ -12,15 +12,13 @@ public class RecipeController : MonoBehaviour
     public BuildingData.CraftSet m_CurrentCraftSet = null;
     private int m_craftSetIndex = -1;
 
-    public delegate void OnBuildingSelected(BuildingData building);
     public delegate void OnCraftSetSelected(BuildingData.CraftSet craftSet);
     
-    public static OnBuildingSelected s_OnBuildingSelected = null;
     public static OnCraftSetSelected s_OnCraftSetSelected = null;
 
     void Start()
     {
-        OnBuildingChanged(ItemDatabase.GetBuildingByUniqueID(""));
+        BuildingController.s_onBuildingSelected += OnBuildingChanged;
     }
    
     void OnBuildingChanged(BuildingData newBuilding)
@@ -29,8 +27,6 @@ public class RecipeController : MonoBehaviour
 
         if(m_CurrentBuilding != null)
         {
-            if(s_OnBuildingSelected != null) s_OnBuildingSelected(m_CurrentBuilding);
-
             m_CurrentCraftSet = m_CurrentBuilding.GetCraftSet();
             m_craftSetIndex = 0;
             if(m_CurrentCraftSet != null && s_OnCraftSetSelected != null) s_OnCraftSetSelected(m_CurrentCraftSet);

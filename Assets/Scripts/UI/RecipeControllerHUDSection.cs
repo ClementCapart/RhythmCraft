@@ -15,13 +15,13 @@ public class RecipeControllerHUDSection : HUDSection
     {
         m_ButtonsUI = new List<ButtonRecipeUI>(GetComponentsInChildren<ButtonRecipeUI>(true));
 
-        RecipeController.s_OnBuildingSelected += OnBuildingSelected;
+        BuildingController.s_onBuildingSelected += OnBuildingSelected;
         RecipeController.s_OnCraftSetSelected += OnCraftSetSelected;
     }
 
     void OnDestroy()
     {
-        RecipeController.s_OnBuildingSelected -= OnBuildingSelected;
+        BuildingController.s_onBuildingSelected -= OnBuildingSelected;
         RecipeController.s_OnCraftSetSelected -= OnCraftSetSelected;
     }
 
@@ -64,7 +64,7 @@ public class RecipeControllerHUDSection : HUDSection
     {
         for(int i = 0; i < m_CurrentBuildDataSetsUI.Count; i++)
         {
-            Destroy(m_CurrentBuildDataSetsUI[i]);
+            Destroy(m_CurrentBuildDataSetsUI[i].gameObject);
         }
 
         m_CurrentBuildDataSetsUI.Clear();
