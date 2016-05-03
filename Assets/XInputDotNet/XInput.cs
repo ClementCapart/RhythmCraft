@@ -78,7 +78,7 @@ public class XInput : MonoBehaviour
         m_gamepadsState.Add(GamePad.GetState(PlayerIndex.Three));
         m_gamepadsState.Add(GamePad.GetState(PlayerIndex.Four));
 
-        /*if(!m_gamepadsState[0].IsConnected)
+        if(!m_gamepadsState[0].IsConnected)
         {
             for(int i = 1; i < m_gamepadsState.Count; i++)
             {
@@ -88,7 +88,7 @@ public class XInput : MonoBehaviour
                     m_gamepadsState[i] = new GamePadState();
                 }
             }
-        }*/
+        }
 
         if (m_previousGamepadsState.Count == 0)
             m_previousGamepadsState.AddRange(m_gamepadsState);
