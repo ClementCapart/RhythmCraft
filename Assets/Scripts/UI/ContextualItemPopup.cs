@@ -17,6 +17,14 @@ public class ContextualItemPopup : ContextualPopup
         Close();
     }
 
+    void Update()
+    {
+        if(XInput.GetButtonUp(Buttons.B, 0))
+        {
+            Close();
+        }
+    }
+
     public void OnDelete()
     {
         m_item.m_item.Delete(int.MaxValue);

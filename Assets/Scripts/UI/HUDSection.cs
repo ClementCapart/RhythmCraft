@@ -16,6 +16,9 @@ public class HUDSection : MonoBehaviour
     public HUDSectionState m_State = HUDSectionState.NotInitialized;
     public Buttons m_Input = Buttons.None;
     public bool m_ButtonIsToggle = false;
+    public float m_HoldTime = 0.2f;
+
+    private float m_heldDuration = 0.0f;
 
     public Vector3 m_MaximizedScale = new Vector3(2.0f, 2.0f, 2.0f);
     public Vector3 m_MinimizedScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -34,10 +37,24 @@ public class HUDSection : MonoBehaviour
         set { m_onChangeState = value; }
     }
 
-
     public void Initialize()
     {
-        m_State = HUDSectionState.Minimized;
+        m_State = HUDSectionState.Minimized;        
+    }
+
+    void Update()
+    {
+        if(m_HoldTime > 0.0f && !m_ButtonIsToggle)
+        {
+            if(XInput.GetButton(m_Input, 0))
+            {
+                m_heldDuration += Time.deltaTime;
+            }
+            else
+            {
+                m_heldDuration = 0.0f;
+            }
+        }
     }
 
     public bool WantsFocus()
@@ -47,13 +64,27 @@ public class HUDSection : MonoBehaviour
 
         if(!m_ButtonIsToggle)
         {
-            if(XInput.GetButton(m_Input, 0))
+            if(m_HoldTime <= 0.0f)
             {
-                return true;
+                if(XInput.GetButton(m_Input, 0))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return false;
+                if(m_heldDuration >= m_HoldTime)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         else

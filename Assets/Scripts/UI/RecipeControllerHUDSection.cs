@@ -8,6 +8,7 @@ public class RecipeControllerHUDSection : HUDSection
     public GameObject m_CraftSetUIPrefab;
 
     List<CraftSetControllerUI> m_CurrentBuildDataSetsUI = new List<CraftSetControllerUI>(); 
+    private CraftSetControllerUI m_currentCraftSetUI = null;
 
     public Vector2 m_CraftSetUIOffset = Vector2.zero;
 
@@ -54,7 +55,7 @@ public class RecipeControllerHUDSection : HUDSection
                 CraftSetControllerUI uiScript = obj.GetComponent<CraftSetControllerUI>();
                 obj.transform.SetParent(transform, false);
                 uiScript.m_RectTransform.anchoredPosition = new Vector2(i * m_CraftSetUIOffset.x, i * m_CraftSetUIOffset.y);
-                uiScript.InitializeIcons(craftSets[i]);
+                uiScript.InitializeIcons(craftSets[i], this);
                 m_CurrentBuildDataSetsUI.Add(uiScript);
             }
         }
@@ -121,10 +122,21 @@ public class RecipeControllerHUDSection : HUDSection
         if(fullDisplay)
         {
             setUI.FullDisplay();
+            m_currentCraftSetUI = setUI;
         }
         else
         {
             setUI.PartialDisplay();
         }
+    }
+
+    public override void SubUpdate()
+    {
+        if(m_State == HUDSectionState.Maximized)
+        {
+            m_currentCraftSetUI.CheckDisplayInfo();
+        }
+
+        base.SubUpdate();
     }
 }

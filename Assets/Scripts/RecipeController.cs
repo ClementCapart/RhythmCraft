@@ -39,24 +39,27 @@ public class RecipeController : MonoBehaviour
 
     void Update()
     {        
-        if (m_CraftPatternPlayer && m_CraftPatternPlayer.m_State == CraftPatternPlayer.PlayerState.Stopped && !HUDSectionSelection.HasSelection())
+        if (m_CraftPatternPlayer && m_CraftPatternPlayer.m_State == CraftPatternPlayer.PlayerState.Stopped)
         {
-            if(XInput.GetButtonUp(Buttons.RightBumper, 0))
+            if (!HUDSectionSelection.HasSelection())
             {
-                SelectNextCraftSet();
-            }
-
-            if(m_CurrentCraftSet != null)
-            {
-                foreach(KeyValuePair<Buttons, ItemData> kvp in m_CurrentCraftSet.GetRecipes())
+                if (XInput.GetButtonUp(Buttons.RightBumper, 0))
                 {
-                    if(XInput.GetButtonDown(kvp.Key, 0))
+                    SelectNextCraftSet();
+                }
+
+                if (m_CurrentCraftSet != null)
+                {
+                    foreach (KeyValuePair<Buttons, ItemData> kvp in m_CurrentCraftSet.GetRecipes())
                     {
-                        m_CraftPatternPlayer.StartPattern(kvp.Value);
-                        break;
+                        if (XInput.GetButtonDown(kvp.Key, 0))
+                        {
+                            m_CraftPatternPlayer.StartPattern(kvp.Value);
+                            break;
+                        }
                     }
                 }
-            }            
+            }
         }
     }
 

@@ -15,6 +15,44 @@ public class HUDSectionSelection : Singleton<HUDSectionSelection>
         return false;
     }
 
+    public static bool IsCurrentSelection<T>() where T : HUDSection
+    {
+        if(HasSelection() && Instance.m_CurrentSelection is T)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static HUDSectionState GetCurrentSelectionState()
+    {
+        if(HasSelection())
+        {
+            return Instance.m_CurrentSelection.m_State;
+        }
+        else
+        {
+            return HUDSectionState.NotInitialized;
+        }
+    }
+
+    public static HUDSectionState GetHUDSectionState<T>() where T : HUDSection
+    {
+        if(Instance != null)
+        {
+            for(int i = 0; i < Instance.m_HUDSections.Length; i++)
+            {
+                if(Instance.m_HUDSections[i] is T)
+                {
+                    return Instance.m_HUDSections[i].m_State;
+                }
+            }
+        }    
+    
+        return HUDSectionState.NotInitialized;
+    }
+
     public static void LockSelection()
     {
         if(Instance)

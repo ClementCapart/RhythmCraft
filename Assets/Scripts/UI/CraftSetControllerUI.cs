@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class CraftSetControllerUI : MonoBehaviour 
 {
+    private HUDSection m_hudSection = null;
     public BuildingData.CraftSet m_CraftSet = null;
     public RectTransform m_RectTransform = null;
 
@@ -17,8 +18,9 @@ public class CraftSetControllerUI : MonoBehaviour
 
     private Coroutine m_movingCoroutine = null;
 
-    public void InitializeIcons(BuildingData.CraftSet craftSet)
+    public void InitializeIcons(BuildingData.CraftSet craftSet, HUDSection hudSection)
     {
+        m_hudSection = hudSection;
         m_CraftSet = craftSet;
         ItemData data = null;
         Dictionary<Buttons, ItemData> recipes = craftSet.GetRecipes();
@@ -65,5 +67,22 @@ public class CraftSetControllerUI : MonoBehaviour
             m_RectTransform.anchoredPosition = Vector2.Lerp(startPosition, position, time / duration);            
             yield return 0;
         }
+    }
+
+    public void CheckDisplayInfo()
+    {
+        foreach(ButtonRecipeUI buttonRecipe in m_Buttons)
+        {
+            if(XInput.GetButtonDown(buttonRecipe.m_Button, 0))
+            {
+                DisplayInfo(buttonRecipe);
+                break;
+            }
+        }
+    }
+
+    public void DisplayInfo(ButtonRecipeUI buttonRecipe)
+    {
+        ContextualPopupManager.CreateRecipeInfoPopup(buttonRecipe, m_hudSection);
     }
 }

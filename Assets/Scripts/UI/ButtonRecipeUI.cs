@@ -9,6 +9,7 @@ public class ButtonRecipeUI : MonoBehaviour
     public Image m_ButtonImage = null;
 
     private ItemData m_item = null;
+    public ItemData Item { get { return m_item; } }
 
     void Start()
     {

@@ -36,10 +36,6 @@ public class ContextualPopup : MonoBehaviour
 
     void Update()
     {
-        if(XInput.GetButtonUp(Buttons.B, 0))
-        {
-            Close();
-        }
     }
 
     public virtual void Close()
