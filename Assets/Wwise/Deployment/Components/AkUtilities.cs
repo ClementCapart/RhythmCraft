@@ -42,7 +42,7 @@ public class WwiseSettings
 				xmlSerializer.Serialize(streamWriter, Settings);
 				xmlStream.Position = 0;
 				xmlDoc.Load(xmlStream);
-				xmlDoc.Save(Path.Combine(Application.dataPath + @"/Wwise", WwiseSettingsFilename));
+				xmlDoc.Save(Path.Combine(Application.dataPath, WwiseSettingsFilename));
 			}
 		}
 		catch (Exception)
@@ -60,10 +60,10 @@ public class WwiseSettings
 		WwiseSettings Settings = new WwiseSettings();
 		try
 		{
-			if (File.Exists(Path.Combine(Application.dataPath + @"/Wwise", WwiseSettingsFilename)))
+			if (File.Exists(Path.Combine(Application.dataPath, WwiseSettingsFilename)))
 			{
 				XmlSerializer xmlSerializer = new XmlSerializer(Settings.GetType());
-				FileStream xmlFileStream = new FileStream(Application.dataPath + @"/Wwise" + "/" + WwiseSettingsFilename, FileMode.Open, FileAccess.Read);
+				FileStream xmlFileStream = new FileStream(Application.dataPath + "/" + WwiseSettingsFilename, FileMode.Open, FileAccess.Read);
 				Settings = (WwiseSettings)xmlSerializer.Deserialize(xmlFileStream);
 				xmlFileStream.Close();
 			}
