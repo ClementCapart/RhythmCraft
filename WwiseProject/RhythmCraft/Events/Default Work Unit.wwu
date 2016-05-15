@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" SchemaVersion="70">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_SuccessCraft" ID="{AB11F879-0973-4A21-A05F-9F9745571141}">
+					<ChildrenList>
+						<Action Name="Play" ID="{3D23C504-9583-4FC1-953E-7D7B0251D788}" ShortID="96900329" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{6CC2C553-F66D-4B23-A21E-12C2FE0FF340}" Global="false">
+									<ObjectRef Name="SuccessCraft" ID="{39D57E4F-857C-4D3C-8A8C-AFC4B92DD0FB}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_FailCraft" ID="{53636146-E215-479E-B62D-7E789F8C4DC0}">
+					<ChildrenList>
+						<Action Name="Play" ID="{487CE507-9E90-408C-A64C-48EFCDDFA628}" ShortID="852399088" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{CBDF2F77-01B7-4911-98DC-B6FC4BC63747}" Global="false">
+									<ObjectRef Name="FailCraft" ID="{7AB32FA6-7026-4AEF-A109-8D4B4BB7961E}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Hoy" ID="{55B909AB-B3C0-4964-A78A-46EB574A3419}">
+					<ChildrenList>
+						<Action Name="Play" ID="{A4DBD3C1-C063-4A62-BE58-4F7A59FD59DE}" ShortID="650946029" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{C62C3E21-8B8C-401E-959F-397A8F2261F9}" Global="false">
+									<ObjectRef Name="Hoy" ID="{674381A1-68EC-492F-A9DE-D5305417AD9F}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_TavernMusic" ID="{08D8388C-ADCF-4F8B-BE6D-9E0A6390133D}">
+					<ChildrenList>
+						<Action Name="Play" ID="{CB957227-4BFA-4A25-96D2-39758542BFB3}" ShortID="336631946" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{23190FCF-9A33-4534-8FD0-18FD3CB4B5DF}" Global="false">
+									<ObjectRef Name="TavernMusic" ID="{21E133B9-FA01-4B9E-AAC6-AF1B2C3CFFBD}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_TavernMusic" ID="{4D0C85FB-2FEB-4193-A83B-3BB3B6F3D150}">
+					<ChildrenList>
+						<Action Name="Stop" ID="{5CBBC257-C118-463C-8500-6BA555B5967F}" ShortID="577369487" Type="Stop" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{F619FF3E-28B6-4789-BD1B-4140D9C481E7}" Global="false">
+									<ObjectRef Name="TavernMusic" ID="{21E133B9-FA01-4B9E-AAC6-AF1B2C3CFFBD}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

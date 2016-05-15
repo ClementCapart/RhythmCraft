@@ -219,6 +219,7 @@ public class ItemData
 
 	public string m_Name = "DefaultItemName";
     public Sprite m_ItemIcon;
+    public Sprite m_FailedBaseIcon;
     public bool m_IsStackable = true;
     public ItemType m_TypeFlags = 0x0;
     //public AnimationClip m_CraftPattern = null;
@@ -230,6 +231,34 @@ public class ItemData
 
     [System.NonSerialized]
     public bool m_AlreadyCrafted = true;
+
+    public bool CanCraft(Inventory inventory)
+    {
+        foreach(RecipeElement recipeElement in m_Recipe.m_ItemsNeeded)
+        {
+            if(!inventory.HasItem(ItemDatabase.GetItemByUniqueID(recipeElement.m_itemID), recipeElement.m_itemCount))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool ConsumeCraftIngredients(Inventory inventory)
+    {
+        if(!CanCraft(inventory))
+        {
+            return false;
+        }
+
+        foreach(RecipeElement recipeElement in m_Recipe.m_ItemsNeeded)
+        {
+            inventory.RemoveItem(ItemDatabase.GetItemByUniqueID(recipeElement.m_itemID), recipeElement.m_itemCount);
+        }
+
+        return true;
+    }
 }
 
 [System.Serializable]
@@ -248,10 +277,11 @@ public class RecipeElement
 [System.Flags]
 public enum ItemType
 {
-    Ingredient = 0x1,
-    Usable = 0x2,
-    Entertainment = 0x4,
-    Building = 0x8,
+    Ingredient = 1,
+    Usable = 2,
+    Entertainment = 4,
+    Building = 8,
+    Base = 16,
 }
 
 public class ItemDatabase : AssetSingleton<ItemDatabase>

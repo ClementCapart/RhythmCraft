@@ -49,12 +49,16 @@ public class BuildingController : MonoBehaviour
 
     void AddInitialBuilding()
     {
-        BuildingData buildingData = ItemDatabase.GetBuildingByUniqueID("");
-        if(buildingData != null)
+        ItemData initialBuilding = ItemDatabase.GetItemByName("Carpentry");
+        if (initialBuilding != null)
         {
-            m_AvailableBuildings.Add(buildingData, 1);
-            AddBuilding(buildingData);
-        }        
+            BuildingData buildingData = ItemDatabase.GetBuildingByUniqueID(initialBuilding.m_UniqueID);
+            if (buildingData != null)
+            {
+                m_AvailableBuildings.Add(buildingData, 1);
+                AddBuilding(buildingData);
+            }
+        }
     }
 
     void Destroy()

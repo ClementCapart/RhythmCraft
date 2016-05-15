@@ -13,6 +13,12 @@ public class ItemDatabaseEditor : Editor
 
     private int m_currentlySelected = 0;
 
+    [MenuItem("Databases/ItemDatabase")]
+    public static void OpenDatabase()
+    {
+        Selection.activeObject = ItemDatabase.Instance;
+    }
+
     public void OnEnable()
     {
         m_itemListProperty = this.serializedObject.FindProperty("m_items");
@@ -56,6 +62,12 @@ public class ItemDatabaseEditor : Editor
                     item.m_ItemIcon = EditorGUILayout.ObjectField("Icon", item.m_ItemIcon, typeof(Sprite), false) as Sprite;
                     item.m_IsStackable = EditorGUILayout.Toggle("Is Stackable", item.m_IsStackable);
                     item.m_TypeFlags = (ItemType)EditorGUILayout.EnumMaskField("Type", item.m_TypeFlags);
+
+                    if((item.m_TypeFlags & ItemType.Base) != 0)
+                    {
+                        item.m_FailedBaseIcon = EditorGUILayout.ObjectField("Failed Base Icon", item.m_FailedBaseIcon, typeof(Sprite), false) as Sprite;
+                    }
+
                     //item.m_CraftPattern = EditorGUILayout.ObjectField("Craft Pattern", item.m_CraftPattern, typeof(AnimationClip), false) as AnimationClip;                    
                     if(item.m_CraftPattern == null)
                     { 

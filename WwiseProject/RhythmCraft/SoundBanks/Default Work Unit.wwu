@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{115DCA53-48A2-4704-8617-98B29A58AD9C}" SchemaVersion="70">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{115DCA53-48A2-4704-8617-98B29A58AD9C}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="CommonSoundBank" ID="{4D7776BE-5625-48C7-BDE0-80244800D4E8}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_FailCraft" ID="{53636146-E215-479E-B62D-7E789F8C4DC0}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_SuccessCraft" ID="{AB11F879-0973-4A21-A05F-9F9745571141}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_TavernMusic" ID="{08D8388C-ADCF-4F8B-BE6D-9E0A6390133D}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_Hoy" ID="{55B909AB-B3C0-4964-A78A-46EB574A3419}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Stop_TavernMusic" ID="{4D0C85FB-2FEB-4193-A83B-3BB3B6F3D150}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

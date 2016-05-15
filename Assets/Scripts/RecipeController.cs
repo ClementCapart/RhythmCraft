@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class RecipeController : MonoBehaviour 
 {
-    List<ItemData> m_AvailableCrafts = new List<ItemData>();
-    
     public CraftPatternPlayer m_CraftPatternPlayer = null;
 
     public BuildingData m_CurrentBuilding = null;
@@ -16,7 +14,7 @@ public class RecipeController : MonoBehaviour
     
     public static OnCraftSetSelected s_OnCraftSetSelected = null;
 
-    void Start()
+    void Awake()
     {
         BuildingController.s_onBuildingSelected += OnBuildingChanged;
     }
@@ -54,7 +52,14 @@ public class RecipeController : MonoBehaviour
                     {
                         if (XInput.GetButtonDown(kvp.Key, 0))
                         {
-                            m_CraftPatternPlayer.StartPattern(kvp.Value);
+                            if(kvp.Value.ConsumeCraftIngredients(Inventory.Instance))
+                            {
+                                m_CraftPatternPlayer.StartPattern(kvp.Value);
+                            }
+                            else
+                            {
+                                //NUT NUT!!
+                            }
                             break;
                         }
                     }

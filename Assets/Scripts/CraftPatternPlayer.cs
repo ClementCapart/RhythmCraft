@@ -180,6 +180,8 @@ public class CraftPatternPlayer : MonoBehaviour
         }
 		
         CraftState endState = CheckEndCraftState(successTokenCount, notes.Length);
+
+        ContextualPopupManager.CreateCraftResultPopup(item, endState);
         
         if(s_craftSequenceEnded != null)
         {

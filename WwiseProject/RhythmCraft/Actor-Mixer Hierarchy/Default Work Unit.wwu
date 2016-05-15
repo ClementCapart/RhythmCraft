@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}" SchemaVersion="70">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="FailCraft" ID="{7AB32FA6-7026-4AEF-A109-8D4B4BB7961E}" ShortID="895337494" Type="SoundFX">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C0BC9317-FE80-4E82-AECB-555EE9BD31C9}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="FailCraft" ID="{6CA5A4D8-9417-40C3-A060-AE5493AB0D20}" ShortID="977597898">
+							<Language>SFX</Language>
+							<AudioFile>FailCraft.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="FailCraft" ID="{6CA5A4D8-9417-40C3-A060-AE5493AB0D20}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Hoy" ID="{674381A1-68EC-492F-A9DE-D5305417AD9F}" ShortID="598670653" Type="SoundFX">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C0BC9317-FE80-4E82-AECB-555EE9BD31C9}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Hoy" ID="{3ECB817D-9E88-4DCB-9333-617EC3C34C43}" ShortID="839821094">
+							<Language>SFX</Language>
+							<AudioFile>Hoy.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Hoy" ID="{3ECB817D-9E88-4DCB-9333-617EC3C34C43}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="SuccessCraft" ID="{39D57E4F-857C-4D3C-8A8C-AFC4B92DD0FB}" ShortID="210036583" Type="SoundFX">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C0BC9317-FE80-4E82-AECB-555EE9BD31C9}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SuccessCraft" ID="{8A3D8B0B-54E5-4F72-94D2-60ACA708CDD0}" ShortID="151675909">
+							<Language>SFX</Language>
+							<AudioFile>SuccessCraft.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SuccessCraft" ID="{8A3D8B0B-54E5-4F72-94D2-60ACA708CDD0}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="TavernMusic" ID="{21E133B9-FA01-4B9E-AAC6-AF1B2C3CFFBD}" ShortID="680058962" Type="SoundFX">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-12</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C0BC9317-FE80-4E82-AECB-555EE9BD31C9}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="TavernMusic" ID="{4860A1DC-FAB9-4F26-B3C3-8C700D2302E6}" ShortID="86465485">
+							<Language>SFX</Language>
+							<AudioFile>TavernMusic.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="TavernMusic" ID="{4860A1DC-FAB9-4F26-B3C3-8C700D2302E6}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

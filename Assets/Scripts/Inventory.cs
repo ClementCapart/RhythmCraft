@@ -34,10 +34,8 @@ public class InventoryItem
     }
 }
 
-public class Inventory : MonoBehaviour 
-{
-    
-
+public class Inventory : Singleton<Inventory> 
+{    
     public delegate void OnItemUpdated(InventoryItem item);
     public static OnItemUpdated s_onItemUpdated;
     public delegate void OnItemAdded(InventoryItem item);
@@ -49,22 +47,12 @@ public class Inventory : MonoBehaviour
     
     void Start()
     {
-        CraftPatternPlayer.s_craftSequenceStarted += OnCraftStart;
         CraftPatternPlayer.s_craftSequenceEnded += OnCraftEnd;     
     }
 
     void OnDestroy()
     {
-        CraftPatternPlayer.s_craftSequenceStarted -= OnCraftStart;
         CraftPatternPlayer.s_craftSequenceEnded -= OnCraftEnd;
-    }
-
-    void OnCraftStart(ItemData itemData)
-    {
-        for(int i = 0; i < itemData.m_Recipe.m_ItemsNeeded.Count; i++)
-        {
-            RemoveItem(ItemDatabase.GetItemByUniqueID(itemData.m_Recipe.m_ItemsNeeded[i].m_itemID), itemData.m_Recipe.m_ItemsNeeded[i].m_itemCount);
-        }
     }
 
     void OnCraftEnd(ItemData itemData, CraftState state)
@@ -76,7 +64,7 @@ public class Inventory : MonoBehaviour
         }        
     } 
 
-    bool HasItem(ItemData item, int count)
+    public bool HasItem(ItemData item, int count)
     {
         for(int i = 0; i < m_InventoryItems.Count; i++)
         {
@@ -133,13 +121,18 @@ public class Inventory : MonoBehaviour
         }        
     }
 
-    void RemoveItem(ItemData item, int count)
+    public void RemoveItem(ItemData item, int count)
     {
         for(int i = m_InventoryItems.Count - 1; i >= 0; i--)
         {
             if(m_InventoryItems[i].m_ItemData == item)
             {
-                RemoveItem(m_InventoryItems[i], count);
+                int countToRemove = Mathf.Min(count, m_InventoryItems[i].m_Count);
+                RemoveItem(m_InventoryItems[i], countToRemove);
+                count -= countToRemove;
+
+                if(count <= 0)
+                    return;
             }
         }
     }

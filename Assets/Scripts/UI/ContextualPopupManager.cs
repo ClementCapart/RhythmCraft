@@ -6,6 +6,9 @@ public class ContextualPopupManager : Singleton<ContextualPopupManager>
     public GameObject m_InventoryItemPopupPrefab = null;
     public GameObject m_RecipeInfoPopupPrefab = null;
 
+    public GameObject m_ItemCraftEndPopupPrefab = null;
+    public Transform m_ItemCraftEndPopupLocation = null;
+
     private ContextualPopup m_currentPopup = null;
 
     public static void CreateInventoryItemPopup(InventoryItemUI item)
@@ -46,4 +49,33 @@ public class ContextualPopupManager : Singleton<ContextualPopupManager>
             itemPopup.SetData(buttonRecipe.Item);
         }
     }
+
+    public static void CreateCraftResultPopup(ItemData itemData, CraftState endState)
+    {
+        if (Instance)
+        {
+            GameObject popup = Instantiate<GameObject>(Instance.m_ItemCraftEndPopupPrefab);
+            popup.transform.SetParent(Instance.m_ItemCraftEndPopupLocation, false);
+
+            AnimatedPopup animatedPopup = popup.GetComponent<AnimatedPopup>();
+            if (animatedPopup != null)
+            {
+                if (endState == CraftState.Success)
+                {
+                    animatedPopup.Initialize(itemData.m_ItemIcon, "SuccessCraft");
+                }
+                else
+                {
+                    if (itemData.m_FailedBaseIcon != null && (itemData.m_TypeFlags & ItemType.Base) != 0)
+                    {
+                        animatedPopup.Initialize(itemData.m_FailedBaseIcon, "FailCraft");                        
+                    }
+                    else
+                    {
+                        animatedPopup.Initialize(itemData.m_ItemIcon, "FailCraft");
+                    }
+                }
+            }
+        }
+    }        
 }

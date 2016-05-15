@@ -66,7 +66,6 @@ public class SplitCamera : MonoBehaviour
 
         camera.rect = rect;
 
-        Matrix4x4 matrix1 = Matrix4x4.TRS(new Vector3( rect.x, rect.y, 0.0f), Quaternion.identity, new Vector3( rect.width, rect.height, 1.0f));
         Matrix4x4 matrix2 = Matrix4x4.TRS(new Vector3((1.0f / rect.width - 1.0f), (1.0f / rect.height - 1.0f), 0.0f), Quaternion.identity, new Vector3(1.0f / rect.width, 1.0f / rect.height, 1.0f));
         Matrix4x4 matrix3 = Matrix4x4.TRS(new Vector3(-rect.x * 2.0f / rect.width, - rect.y * 2.0f / rect.height, 0.0f), Quaternion.identity, Vector3.one);
 
