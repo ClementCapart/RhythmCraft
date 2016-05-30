@@ -56,6 +56,10 @@ public class ItemDatabaseEditor : Editor
                     GUI.enabled = false;
                     EditorGUILayout.TextField("Unique ID", item.m_UniqueID.ToString());
                     GUI.enabled = true;
+                    if(GUILayout.Button("Copy GUID"))
+                    {
+                        GUIUtility.systemCopyBuffer = item.m_UniqueID.ToString();
+                    }
 
                     item.m_Enabled = EditorGUILayout.Toggle("Enabled", item.m_Enabled);
                     item.m_Name = EditorGUILayout.TextField("Name", item.m_Name);                    

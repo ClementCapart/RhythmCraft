@@ -52,6 +52,7 @@ public class DisplayTextBehaviourState : StateMachineBehaviour
 	    if(m_DestroyBubbleOnEnd)
         {
             m_speechUIElement.Destroy();
+            StateMachineBlackboard.RemoveObject(animator, m_speechBubbleBlackboardId);
         }
 	}
 }

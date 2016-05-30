@@ -102,6 +102,54 @@ public class StateMachineBlackboard
         }
     }
 
+    public static void RemoveInt(Animator animator, string key)
+    {
+        if(Instance != null)
+        {
+            Blackboard board = GetBlackboard(animator);
+            if(board != null)
+            {
+                board.RemoveInt(key);
+            }
+        }
+    }
+
+    public static void RemoveFloat(Animator animator, string key)
+    {
+        if(Instance != null)
+        {
+            Blackboard board = GetBlackboard(animator);
+            if(board != null)
+            {
+                board.RemoveFloat(key);
+            }
+        }
+    }
+
+    public static void RemoveString(Animator animator, string key)
+    {
+        if(Instance != null)
+        {
+            Blackboard board = GetBlackboard(animator);
+            if(board != null)
+            {
+                board.RemoveString(key);
+            }
+        }
+    }
+
+    public static void RemoveObject(Animator animator, string key)
+    {
+        if(Instance != null)
+        {
+            Blackboard board = GetBlackboard(animator);
+            if(board != null)
+            {
+                board.RemoveObject(key);
+            }
+        }
+    }
+
     public static bool GetInt(Animator animator, string key, out int value)
     {
         if(Instance != null)
@@ -269,6 +317,37 @@ public class Blackboard
         else
         {
             m_objectBoard.Add(key, value);
+        }
+    }
+    public void RemoveInt(string key)
+    {
+        if(m_intBoard.ContainsKey(key))
+        {
+            m_intBoard.Remove(key);
+        }
+    }
+
+    public void RemoveFloat(string key)
+    {
+        if(m_floatBoard.ContainsKey(key))
+        {
+            m_floatBoard.Remove(key);
+        }
+    }
+
+    public void RemoveString(string key)
+    {
+        if(m_stringBoard.ContainsKey(key))
+        {
+            m_stringBoard.Remove(key);
+        }
+    }
+
+    public void RemoveObject(string key)
+    {
+        if(m_objectBoard.ContainsKey(key))
+        {
+            m_objectBoard.Remove(key);
         }
     }
 
