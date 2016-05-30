@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class RhythmController : MonoBehaviour
+public class RhythmController : Controller
 {
 	private static RhythmController m_instance = null;
 	public static RhythmController Instance
@@ -28,12 +28,18 @@ public class RhythmController : MonoBehaviour
 
 	void Awake()
 	{
+        Controller.RegisterController(this);
 		m_instance = this;
 	}
 
+    void OnDestroy()
+    {
+        Controller.UnregisterController(this);
+    }
+
 	void Update()
 	{
-        if(HUDSectionSelection.HasSelection())
+        if(HUDSectionSelection.HasSelection() || IsLocked())
         {
             TryChangeDirection(Direction.None);
         }

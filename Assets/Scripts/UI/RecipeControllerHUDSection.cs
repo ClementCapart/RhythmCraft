@@ -76,12 +76,17 @@ public class RecipeControllerHUDSection : HUDSection
         GenerateSetsUI(buildingData);
     }
 
-    void OnCraftSetSelected(BuildingData.CraftSet craftSet)
+    void OnCraftSetSelected(BuildingData.CraftSet craftSet, BuildingData building)
     {
         bool found = false;
         int currentSiblingIndexToSet = transform.childCount - 1;
         int offsetMultiplier = 0;
         int indexToStopTo = -1;
+
+        if(m_CurrentBuildDataSetsUI.Count == 0)
+        {
+            OnBuildingSelected(building);
+        }
 
         for (int i = 0; i < m_CurrentBuildDataSetsUI.Count; i++)
         {

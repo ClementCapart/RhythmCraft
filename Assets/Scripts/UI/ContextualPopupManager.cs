@@ -5,9 +5,10 @@ public class ContextualPopupManager : Singleton<ContextualPopupManager>
 {
     public GameObject m_InventoryItemPopupPrefab = null;
     public GameObject m_RecipeInfoPopupPrefab = null;
-
     public GameObject m_ItemCraftEndPopupPrefab = null;
     public Transform m_ItemCraftEndPopupLocation = null;
+    public GameObject m_SpeechBubblePrefab = null;
+    public Transform m_SpeechBubbleLocation = null;
 
     private ContextualPopup m_currentPopup = null;
 
@@ -77,5 +78,19 @@ public class ContextualPopupManager : Singleton<ContextualPopupManager>
                 }
             }
         }
-    }        
+    }   
+    
+    public static SpeechUIElement CreateSpeechBubble()
+    {
+        if(Instance)
+        {
+            GameObject popup = Instantiate<GameObject>(Instance.m_SpeechBubblePrefab);
+            popup.transform.SetParent(Instance.m_SpeechBubbleLocation, false);
+
+            SpeechUIElement component = popup.GetComponentInChildren<SpeechUIElement>();
+            return component;
+        }
+
+        return null;
+    }
 }

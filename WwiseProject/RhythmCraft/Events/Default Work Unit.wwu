@@ -39,6 +39,10 @@
 				<Event Name="Play_TavernMusic" ID="{08D8388C-ADCF-4F8B-BE6D-9E0A6390133D}">
 					<ChildrenList>
 						<Action Name="Play" ID="{CB957227-4BFA-4A25-96D2-39758542BFB3}" ShortID="336631946" Type="Play" Scope="One" Global="false">
+							<PropertyList>
+								<Property Name="FadeCurve" Type="int16" Value="7"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
 							<ElementList>
 								<Element ID="{23190FCF-9A33-4534-8FD0-18FD3CB4B5DF}" Global="false">
 									<ObjectRef Name="TavernMusic" ID="{21E133B9-FA01-4B9E-AAC6-AF1B2C3CFFBD}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
@@ -53,6 +57,37 @@
 							<ElementList>
 								<Element ID="{F619FF3E-28B6-4789-BD1B-4140D9C481E7}" Global="false">
 									<ObjectRef Name="TavernMusic" ID="{21E133B9-FA01-4B9E-AAC6-AF1B2C3CFFBD}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Set_Low_MusicBus" ID="{46C8F131-0585-4022-AB13-076E2F23D8F3}">
+					<ChildrenList>
+						<Action Name="Set Bus Volume" ID="{4BC16358-947E-4989-B031-8D1760311771}" ShortID="362928613" Type="ChangeBusVolume" Scope="One" Global="true">
+							<PropertyList>
+								<Property Name="FadeCurve" Type="int16" Value="7"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
+								<Property Name="Volume" Type="Real64" Value="-18"/>
+							</PropertyList>
+							<ElementList>
+								<Element ID="{F8FDE4DD-2679-4667-AEC4-D6F97821C039}" Global="true">
+									<ObjectRef Name="MusicBus" ID="{5142B8EB-C49B-426E-8524-FC6BB48A125C}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Set_Normal_MusicBus" ID="{FA982256-1229-4924-B22E-AC85CA34015E}">
+					<ChildrenList>
+						<Action Name="Set Bus Volume" ID="{67D91855-641A-411F-A210-CD09745B3E14}" ShortID="53432883" Type="ChangeBusVolume" Scope="One" Global="true">
+							<PropertyList>
+								<Property Name="FadeCurve" Type="int16" Value="7"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
+							</PropertyList>
+							<ElementList>
+								<Element ID="{B6528F2B-5C8B-432E-903C-AFF562F4DA59}" Global="true">
+									<ObjectRef Name="MusicBus" ID="{5142B8EB-C49B-426E-8524-FC6BB48A125C}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
 								</Element>
 							</ElementList>
 						</Action>

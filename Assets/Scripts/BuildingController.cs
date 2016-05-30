@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BuildingController : MonoBehaviour 
+public class BuildingController : Controller 
 {
     public enum ControlDirection
     {
@@ -34,15 +34,16 @@ public class BuildingController : MonoBehaviour
 
     void Awake()
     {
+        Controller.RegisterController(this);
         Inventory.s_onItemAdded += CheckIfBuildingAdded;
         Inventory.s_onItemRemoved += CheckIfBuildingRemoved;
     }
 
     void Start()
     {
-        if(m_AvailableBuildings == null) m_AvailableBuildings = new Dictionary<BuildingData,int>();
-        else m_AvailableBuildings.Clear();      
- 
+        if (m_AvailableBuildings == null) m_AvailableBuildings = new Dictionary<BuildingData, int>();
+        else m_AvailableBuildings.Clear();
+
         AddInitialBuilding();
         SelectBuilding(+1);
     }
@@ -67,9 +68,14 @@ public class BuildingController : MonoBehaviour
         Inventory.s_onItemRemoved -= CheckIfBuildingRemoved;
     }
 
+    void OnDestroy()
+    {
+        Controller.UnregisterController(this);
+    }
+
     void Update()
     {
-        if(m_AvailableBuildings.Count <= 1)
+        if(m_AvailableBuildings.Count <= 1 || HUDSectionSelection.HasSelection() || IsLocked())
             return;
 
         switch(m_ControlDirection)

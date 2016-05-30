@@ -2,11 +2,13 @@ Event	ID	Name			Wwise Object Path	Notes
 	1567819237	Play_TavernMusic			\Default Work Unit\Play_TavernMusic	
 	1752017675	Stop_TavernMusic			\Default Work Unit\Stop_TavernMusic	
 	2994221238	Play_Hoy			\Default Work Unit\Play_Hoy	
+	3444296123	Set_Normal_MusicBus			\Default Work Unit\Set_Normal_MusicBus	
 	3444353896	Play_FailCraft			\Default Work Unit\Play_FailCraft	
+	3867299730	Set_Low_MusicBus			\Default Work Unit\Set_Low_MusicBus	
 	4002250215	Play_SuccessCraft			\Default Work Unit\Play_SuccessCraft	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	86465485	TavernMusic	E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\.cache\Windows\SFX\TavernMusic_4B8CC0C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\TavernMusic		36218944
+	86465485	TavernMusic	E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\.cache\Windows\SFX\TavernMusic_4B8CC0C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music\TavernMusic		35996896
 	151675909	SuccessCraft	E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\.cache\Windows\SFX\SuccessCraft_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\SuccessCraft		344680
 	839821094	Hoy	E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\.cache\Windows\SFX\Hoy_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Hoy		286080
 	977597898	FailCraft	E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\.cache\Windows\SFX\FailCraft_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\FailCraft		25210

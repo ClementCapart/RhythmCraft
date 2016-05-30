@@ -23,6 +23,8 @@
 				<Event Id="2994221238" Name="Play_Hoy"/>
 				<Event Id="4002250215" Name="Play_SuccessCraft"/>
 				<Event Id="1567819237" Name="Play_TavernMusic"/>
+				<Event Id="3867299730" Name="Set_Low_MusicBus" MaxAttenuation="0.000000"/>
+				<Event Id="3444296123" Name="Set_Normal_MusicBus" MaxAttenuation="0.000000"/>
 				<Event Id="1752017675" Name="Stop_TavernMusic" MaxAttenuation="0.000000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>

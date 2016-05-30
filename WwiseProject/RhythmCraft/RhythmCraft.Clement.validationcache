@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ValidationCache Version="1" SchemaVersion="70">
-	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1465864070" DateHigh="30518937"/>
+	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="2621083881" DateHigh="30518941"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Attenuations\Default Work Unit.wwu" DateLow="1466178255" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Control Surface Sessions\Default Work Unit.wwu" DateLow="1465678967" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Conversion Settings\Default Work Unit.wwu" DateLow="1465769012" DateHigh="30518937"/>
@@ -8,7 +8,7 @@
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1466058426" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Effects\Default Work Unit.wwu" DateLow="1466013345" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Effects\Factory Effects.wwu" DateLow="1528674560" DateHigh="30449140"/>
-	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Events\Default Work Unit.wwu" DateLow="1465948307" DateHigh="30518937"/>
+	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Events\Default Work Unit.wwu" DateLow="1514052095" DateHigh="30518938"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Game Parameters\Default Work Unit.wwu" DateLow="1466298336" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1466088440" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1465829047" DateHigh="30518937"/>
@@ -17,9 +17,9 @@
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Presets\Default Work Unit.wwu" DateLow="1466153244" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Queries\Default Work Unit.wwu" DateLow="1466263307" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Queries\Factory Queries.wwu" DateLow="1528674560" DateHigh="30449140"/>
-	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\RhythmCraft.Clement.wsettings" DateLow="1664206591" DateHigh="30518937"/>
-	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\RhythmCraft.wproj" DateLow="1867486928" DateHigh="30518937"/>
-	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\SoundBanks\Default Work Unit.wwu" DateLow="1466213380" DateHigh="30518937"/>
+	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\RhythmCraft.Clement.wsettings" DateLow="2430737879" DateHigh="30518963"/>
+	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\RhythmCraft.wproj" DateLow="4195642999" DateHigh="30518973"/>
+	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\SoundBanks\Default Work Unit.wwu" DateLow="335398556" DateHigh="30518939"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1466118466" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\States\Default Work Unit.wwu" DateLow="1465978328" DateHigh="30518937"/>
 	<ValidationCacheItem File="E:\Game Projects\RhythmCraft\WwiseProject\RhythmCraft\Switches\Default Work Unit.wwu" DateLow="1465914098" DateHigh="30518937"/>

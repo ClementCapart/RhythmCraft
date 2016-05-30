@@ -60,33 +60,40 @@
 						<ActiveSource Name="SuccessCraft" ID="{8A3D8B0B-54E5-4F72-94D2-60ACA708CDD0}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
-				<Sound Name="TavernMusic" ID="{21E133B9-FA01-4B9E-AAC6-AF1B2C3CFFBD}" ShortID="680058962" Type="SoundFX">
-					<PropertyList>
-						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-12</Value>
-							</ValueList>
-						</Property>
-					</PropertyList>
+				<ActorMixer Name="Music" ID="{CF34CC6A-207C-4795-9FEC-F20BC7F4C238}" ShortID="799830902">
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C0BC9317-FE80-4E82-AECB-555EE9BD31C9}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+							<ObjectRef Name="MusicBus" ID="{5142B8EB-C49B-426E-8524-FC6BB48A125C}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<AudioFileSource Name="TavernMusic" ID="{4860A1DC-FAB9-4F26-B3C3-8C700D2302E6}" ShortID="86465485">
-							<Language>SFX</Language>
-							<AudioFile>TavernMusic.wav</AudioFile>
-						</AudioFileSource>
+						<Sound Name="TavernMusic" ID="{21E133B9-FA01-4B9E-AAC6-AF1B2C3CFFBD}" ShortID="680058962" Type="SoundFX">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C0BC9317-FE80-4E82-AECB-555EE9BD31C9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="MusicBus" ID="{5142B8EB-C49B-426E-8524-FC6BB48A125C}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="TavernMusic" ID="{4860A1DC-FAB9-4F26-B3C3-8C700D2302E6}" ShortID="86465485">
+									<Language>SFX</Language>
+									<AudioFile>TavernMusic.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="TavernMusic" ID="{4860A1DC-FAB9-4F26-B3C3-8C700D2302E6}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
-					<ActiveSourceList>
-						<ActiveSource Name="TavernMusic" ID="{4860A1DC-FAB9-4F26-B3C3-8C700D2302E6}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
+				</ActorMixer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>
