@@ -79,7 +79,7 @@ public class Inventory : Singleton<Inventory>
         return false;
     }
 
-    void AddItem(ItemData item, int count)
+    public void AddItem(ItemData item, int count)
     {
         InventoryItem newItem = null;
 
@@ -97,14 +97,19 @@ public class Inventory : Singleton<Inventory>
 
             newItem = new InventoryItem(item, count, this);
             m_InventoryItems.Add(newItem);
+
+            if(newItem != null && s_onItemAdded != null) s_onItemAdded(newItem);
         }
         else
         {
-            newItem = new InventoryItem(item, count, this);
-            m_InventoryItems.Add(newItem);
+            for(int i = 0; i < count; i++)
+            {
+                newItem = new InventoryItem(item, 1, this);
+                m_InventoryItems.Add(newItem);
+                if(newItem != null && s_onItemAdded != null) s_onItemAdded(newItem);
+                newItem = null;
+            }
         }
-
-        if(newItem != null && s_onItemAdded != null) s_onItemAdded(newItem);
     }
 
     public void RemoveItem(InventoryItem item, int count)
