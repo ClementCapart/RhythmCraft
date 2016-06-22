@@ -5,6 +5,7 @@
 			<ChildrenList>
 				<SoundBank Name="CommonSoundBank" ID="{4D7776BE-5625-48C7-BDE0-80244800D4E8}">
 					<ObjectInclusionList>
+						<ObjectRef Name="Play_DragonRoar" ID="{49732E15-44B8-434D-8A3B-3DB2C08F83E7}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="Set_Low_MusicBus" ID="{46C8F131-0585-4022-AB13-076E2F23D8F3}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="Play_FailCraft" ID="{53636146-E215-479E-B62D-7E789F8C4DC0}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="Set_Normal_MusicBus" ID="{FA982256-1229-4924-B22E-AC85CA34015E}" WorkUnitID="{E6A79FF4-5ED5-42C3-B3CA-C3E0E04178DC}" Filter="7" Origin="Manual"/>

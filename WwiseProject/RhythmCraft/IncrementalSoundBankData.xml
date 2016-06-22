@@ -2,7 +2,7 @@
 <IncrementalBankBuild Version="4" Flags="878078161">
 	<Platform GUID="{F51EE54B-54E5-4BEF-83F2-E0E7C4821E52}">
 		<Language ID="0">
-			<Bank Name="CommonSoundBank" Hash="3924514984" StreamHash="157587662" Timestamp="131078027217243089"/>
+			<Bank Name="CommonSoundBank" Hash="3005742622" StreamHash="157587662" Timestamp="131111007071511929"/>
 			<Bank Name="Init" Hash="1551745933" StreamHash="157587662" Timestamp="131078027470038516"/>
 		</Language>
 	</Platform>

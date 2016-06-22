@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_DRAGONROAR = 2646126259U;
         static const AkUniqueID PLAY_FAILCRAFT = 3444353896U;
         static const AkUniqueID PLAY_HOY = 2994221238U;
         static const AkUniqueID PLAY_SUCCESSCRAFT = 4002250215U;

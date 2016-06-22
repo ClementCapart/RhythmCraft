@@ -94,6 +94,25 @@
 						</Sound>
 					</ChildrenList>
 				</ActorMixer>
+				<Sound Name="DragonRoar" ID="{A9785E87-A7E1-4986-BFD8-0C0A2F1612CE}" ShortID="1012959704" Type="SoundFX">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C0BC9317-FE80-4E82-AECB-555EE9BD31C9}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C342A8D3-6D53-448B-AEA0-B7A5994FCBBB}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="DragonRoar" ID="{BCE84CB5-CE7B-4FDC-9E8E-D773B87682C0}" ShortID="402679968">
+							<Language>SFX</Language>
+							<AudioFile>DragonRoar.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="DragonRoar" ID="{BCE84CB5-CE7B-4FDC-9E8E-D773B87682C0}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

@@ -19,6 +19,7 @@
 			<ShortName>CommonSoundBank</ShortName>
 			<Path>CommonSoundBank.bnk</Path>
 			<IncludedEvents>
+				<Event Id="2646126259" Name="Play_DragonRoar"/>
 				<Event Id="3444353896" Name="Play_FailCraft"/>
 				<Event Id="2994221238" Name="Play_Hoy"/>
 				<Event Id="4002250215" Name="Play_SuccessCraft"/>
@@ -35,6 +36,10 @@
 				<File Id="151675909" Language="SFX">
 					<ShortName>SuccessCraft.wav</ShortName>
 					<Path>SFX\SuccessCraft_9E69E797.wem</Path>
+				</File>
+				<File Id="402679968" Language="SFX">
+					<ShortName>DragonRoar.wav</ShortName>
+					<Path>SFX\DragonRoar_9E69E797.wem</Path>
 				</File>
 				<File Id="839821094" Language="SFX">
 					<ShortName>Hoy.wav</ShortName>

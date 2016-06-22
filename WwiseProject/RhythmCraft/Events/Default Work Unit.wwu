@@ -93,6 +93,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_DragonRoar" ID="{49732E15-44B8-434D-8A3B-3DB2C08F83E7}">
+					<ChildrenList>
+						<Action Name="Play" ID="{A3E1B5D2-1B49-462E-B2F4-3A75F28645AC}" ShortID="762641864" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{D39945B6-974E-43E2-A074-9C4CE717E582}" Global="false">
+									<ObjectRef Name="DragonRoar" ID="{A9785E87-A7E1-4986-BFD8-0C0A2F1612CE}" WorkUnitID="{546EC23C-CFE8-4FDD-B8F4-F2E844560330}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
